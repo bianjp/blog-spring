@@ -28,7 +28,7 @@ spring:
     store-type: redis
 
   freemarker:
-    cache: false
+    cache: true
     charset: UTF-8
     check-template-location: true
     content-type: text/html
@@ -36,3 +36,11 @@ spring:
     expose-session-attributes: false
     request-context-attribute: request
     allowSessionOverride: true
+
+logging:
+  level:
+    root: info
+    org.springframework.web: info
+    org.springframework.security: info
+    org.hibernate: info
+  file: log/app.log
