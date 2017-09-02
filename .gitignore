@@ -27,3 +27,6 @@ nbdist/
 /src/main/resources/application-local.yml
 
 /log
+
+/node_modules
+/npm-debug.log

@@ -44,3 +44,7 @@ logging:
     org.springframework.security: info
     org.hibernate: info
   file: log/app.log
+
+assets:
+  development: true
+  upstream: http://127.0.0.1:4200/

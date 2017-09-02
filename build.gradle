@@ -32,4 +32,7 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
+    // Automatically generate configuration meta-data file from items annotated with @ConfigurationProperties
+    compileOnly('org.springframework.boot:spring-boot-configuration-processor')
+
 }
