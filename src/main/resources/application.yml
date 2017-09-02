@@ -11,7 +11,7 @@ spring:
 
     hibernate:
       naming:
-        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
 
 #  # save in application-local.yml to avoid occasionally commit password into repository
 #  datasource:
@@ -48,3 +48,6 @@ logging:
 assets:
   development: true
   upstream: http://127.0.0.1:4200/
+
+blog:
+  title: "bianjp's Blog"

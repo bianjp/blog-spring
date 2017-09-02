@@ -1,1 +1,22 @@
 @import "frontend/global";
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  width: 400px;
+  max-width: 90%;
+}
+
+h2 {
+  text-align: center;
+}
+
+.back-to-home {
+  margin-top: 20px;
+  margin-bottom: 100px;
+  text-align: center;
+}

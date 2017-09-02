@@ -14,11 +14,14 @@ public class FreemarkerConfig extends FreeMarkerAutoConfiguration.FreeMarkerWebC
 
   @Autowired private ApplicationContext context;
 
+  @Autowired private BlogProperties blogProperties;
+
   @Override
   public FreeMarkerConfigurer freeMarkerConfigurer() {
     FreeMarkerConfigurer configurer = super.freeMarkerConfigurer();
     Map<String, Object> sharedVariables = new HashMap<>();
     sharedVariables.put("assetPath", context.getBean(AssetPathHelper.class));
+    sharedVariables.put("blog", blogProperties);
     configurer.setFreemarkerVariables(sharedVariables);
 
     return configurer;
