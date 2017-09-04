@@ -45,6 +45,11 @@ logging:
     org.hibernate: info
   file: log/app.log
 
+management:
+  security:
+    enabled: true
+    roles: ADMIN
+
 assets:
   development: true
   upstream: http://127.0.0.1:4200/

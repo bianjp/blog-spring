@@ -3,61 +3,32 @@ package com.bianjp.blog.entity;
 import com.bianjp.blog.entity_helper.BaseEntity;
 import com.bianjp.blog.entity_helper.LocalDateConverter;
 import com.bianjp.blog.entity_helper.PostStatusConverter;
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Post extends BaseEntity {
-  public enum Status {
-    DELETED(-1, "deleted"),
-    DRAFT(0, "draft"),
-    PUBLISHED(1, "published"),
-    UNPUBLISHED(2, "unpublished");
-
-    private int code;
-    private String text;
-
-    Status(int code, String text) {
-      this.code = code;
-      this.text = text;
-    }
-
-    public int getCode() {
-      return code;
-    }
-
-    public void setCode(int code) {
-      this.code = code;
-    }
-
-    public String getText() {
-      return text;
-    }
-
-    public void setText(String text) {
-      this.text = text;
-    }
-
-    public static Status findByCode(int code) {
-      for (Status status : Status.values()) {
-        if (status.code == code) {
-          return status;
-        }
-      }
-
-      return null;
-    }
-  }
-
+  @NotNull
+  @Size(min = 1, max = 100)
   private String title;
+
   @Convert(converter = LocalDateConverter.class)
   private LocalDate publishDate;
+
+  @NotNull
+  @Size(min = 1, max = 100)
+  @Pattern(regexp = "[\\w\\-_]+")
   private String slug;
+
+  @NotNull
+  @Size(min = 1)
   private String content;
+
   private String contentHtml;
 
   @Convert(converter = PostStatusConverter.class)
@@ -111,11 +82,93 @@ public class Post extends BaseEntity {
     this.status = status;
   }
 
+  public boolean isDraft() {
+    return status == Status.DRAFT;
+  }
+
+  public boolean isPublished() {
+    return status == Status.PUBLISHED;
+  }
+
   public String getPrettyUrl() {
     if (publishDate == null) {
-      return Integer.toString(id);
+      return "";
     }
 
     return publishDate.toString("yyyy/MM/dd") + "/" + slug;
+  }
+
+  @Override
+  public String toString() {
+    return "Post{"
+        + "title='"
+        + title
+        + '\''
+        + ", publishDate="
+        + publishDate
+        + ", slug='"
+        + slug
+        + '\''
+        + ", content='"
+        + content
+        + '\''
+        + ", contentHtml='"
+        + contentHtml
+        + '\''
+        + ", status="
+        + status
+        + ", id="
+        + id
+        + ", updatedAt="
+        + updatedAt
+        + ", createdAt="
+        + createdAt
+        + '}';
+  }
+
+  public enum Status {
+    DELETED(-1, "deleted"),
+    DRAFT(0, "draft"),
+    PUBLISHED(1, "published"),
+    UNPUBLISHED(2, "unpublished");
+
+    private int code;
+    private String text;
+
+    Status(int code, String text) {
+      this.code = code;
+      this.text = text;
+    }
+
+    public int getCode() {
+      return code;
+    }
+
+    public void setCode(int code) {
+      this.code = code;
+    }
+
+    public String getText() {
+      return text;
+    }
+
+    public void setText(String text) {
+      this.text = text;
+    }
+
+    @Override
+    public String toString() {
+      return text;
+    }
+
+    public static Status findByCode(int code) {
+      for (Status status : Status.values()) {
+        if (status.code == code) {
+          return status;
+        }
+      }
+
+      return null;
+    }
   }
 }

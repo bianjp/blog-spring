@@ -2,15 +2,16 @@ package com.bianjp.blog.entity_helper;
 
 import org.joda.time.DateTime;
 
-import javax.persistence.Convert;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @MappedSuperclass
 public class BaseEntity implements Serializable {
-  @Id protected int id;
+  private static final long serialVersionUID = 100L;
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  protected Integer id;
 
   @Convert(converter = DateTimeConverter.class)
   protected DateTime updatedAt;
@@ -18,11 +19,11 @@ public class BaseEntity implements Serializable {
   @Convert(converter = DateTimeConverter.class)
   protected DateTime createdAt;
 
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -42,9 +43,13 @@ public class BaseEntity implements Serializable {
     this.updatedAt = updatedAt;
   }
 
+  public boolean isNewRecord() {
+    return id == null || id == 0;
+  }
+
   @PrePersist
   public void prePersist() {
-    if (id == 0) {
+    if (isNewRecord()) {
       createdAt = new DateTime();
     }
     updatedAt = new DateTime();

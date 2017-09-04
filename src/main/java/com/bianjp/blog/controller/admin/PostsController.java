@@ -10,9 +10,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -67,7 +71,18 @@ public class PostsController {
   // API: Add new post
   @PostMapping("")
   @ResponseBody
-  public JSONReplyDTO create() {
+  public JSONReplyDTO create(@Valid Post post, Errors errors) {
+    if (errors.hasFieldErrors()) {
+      FieldError error = errors.getFieldError();
+      return JSONReplyDTO.fail(error.getField() + ": " + error.getDefaultMessage());
+    }
+
+    try {
+      postRepository.save(post);
+    } catch (PersistenceException e) {
+      return JSONReplyDTO.fail(e.getMessage());
+    }
+
     return new JSONReplyDTO();
   }
 

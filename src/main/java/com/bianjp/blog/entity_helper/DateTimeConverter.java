@@ -10,11 +10,11 @@ import java.util.Date;
 public class DateTimeConverter implements AttributeConverter<DateTime, Date> {
   @Override
   public Date convertToDatabaseColumn(DateTime attribute) {
-    return attribute.toDate();
+    return attribute == null ? null : attribute.toDate();
   }
 
   @Override
   public DateTime convertToEntityAttribute(Date dbData) {
-    return new DateTime(dbData);
+    return dbData == null ? null : new DateTime(dbData);
   }
 }

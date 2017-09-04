@@ -10,11 +10,11 @@ import java.util.Date;
 public class LocalDateConverter implements AttributeConverter<LocalDate, Date> {
   @Override
   public Date convertToDatabaseColumn(LocalDate attribute) {
-    return attribute.toDate();
+    return attribute == null ? null : attribute.toDate();
   }
 
   @Override
   public LocalDate convertToEntityAttribute(Date dbData) {
-    return LocalDate.fromDateFields(dbData);
+    return dbData == null ? null : LocalDate.fromDateFields(dbData);
   }
 }
