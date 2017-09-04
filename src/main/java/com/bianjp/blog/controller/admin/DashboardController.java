@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin")
-public class IndexController {
+public class DashboardController {
 
   @GetMapping("")
   public String index() {
-    return "home";
+    return "admin/dashboard";
   }
 }

@@ -1,0 +1,20 @@
+body {
+  min-height: 100%;
+}
+
+$page-sidebar-width: 200px;
+
+.page-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: $page-sidebar-width !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+.page-main {
+  margin-left: $page-sidebar-width;
+  padding: 10px 20px;
+}

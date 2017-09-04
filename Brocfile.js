@@ -17,6 +17,7 @@ var imageTree = imagesDir;
 const stylesheetsFiles = [
   'application',
   'login',
+  'admin',
 ];
 
 const sassOptions = {

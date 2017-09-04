@@ -1,5 +1,6 @@
 package com.bianjp.blog.entity;
 
+import com.bianjp.blog.entity_helper.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
