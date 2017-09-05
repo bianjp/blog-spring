@@ -1,4 +1,3 @@
-<#-- @ftlvariable name="request" type="org.springframework.web.servlet.support.RequestContext" -->
 <#macro layout pageTitle="" bodyClass="" containerClass="">
 <!doctype html>
 <html lang="en">
@@ -12,20 +11,20 @@
   <link rel="stylesheet" href="${assetPath('admin.css')}">
 </head>
 <body class="${bodyClass}">
-  <aside class="page-sidebar ui vertical inverted borderless menu">
-    <a class="item ${(request.requestUri == "/admin")?then("active", "")}" href="/admin">Dashboard</a>
-    <a class="item ${(request.requestUri == "/admin/posts" && !request.queryString?default('')?contains("drafts"))?then("active", "")}" href="/admin/posts">Posts</a>
-    <a class="item ${(request.requestUri == "/admin/posts" && request.queryString?default('')?contains("drafts"))?then("active", "")}" href="/admin/posts?drafts=true">Drafts</a>
-    <a class="item ${(request.requestUri == "/admin/posts/new")?then("active", "")}" href="posts/new">New Post</a>
-  </aside>
+<aside class="page-sidebar ui vertical inverted borderless menu">
+  <a class="item ${(request.requestUri == "/admin")?then("active", "")}" href="/admin">Dashboard</a>
+  <a class="item ${(request.requestUri == "/admin/posts")?then("active", "")}" href="/admin/posts">Posts</a>
+  <a class="item ${(request.requestUri == "/admin/posts/drafts")?then("active", "")}" href="/admin/posts/drafts">Drafts</a>
+  <a class="item ${(request.requestUri == "/admin/posts/new")?then("active", "")}" href="/admin/posts/new">New Post</a>
+</aside>
 
-  <main class="page-main ${containerClass}">
-    <#nested/>
-  </main>
+<main class="page-main ${containerClass}">
+  <#nested/>
+</main>
 
-  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.js"></script>
-  <script src="${assetPath('admin.js')}"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.js"></script>
+<script src="${assetPath('admin.js')}"></script>
 </body>
 </html>
 </#macro>

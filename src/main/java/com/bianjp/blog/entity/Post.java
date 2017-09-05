@@ -3,6 +3,7 @@ package com.bianjp.blog.entity;
 import com.bianjp.blog.entity_helper.BaseEntity;
 import com.bianjp.blog.entity_helper.LocalDateConverter;
 import com.bianjp.blog.entity_helper.PostStatusConverter;
+import com.bianjp.blog.helper.Markdown2HTML;
 import org.joda.time.LocalDate;
 
 import javax.persistence.Convert;
@@ -64,6 +65,7 @@ public class Post extends BaseEntity {
 
   public void setContent(String content) {
     this.content = content;
+    this.contentHtml = Markdown2HTML.render(content);
   }
 
   public String getContentHtml() {
@@ -88,6 +90,12 @@ public class Post extends BaseEntity {
 
   public boolean isPublished() {
     return status == Status.PUBLISHED;
+  }
+
+  public void initPublishDate() {
+    if (publishDate == null) {
+      publishDate = new LocalDate();
+    }
   }
 
   public String getPrettyUrl() {
@@ -170,5 +178,16 @@ public class Post extends BaseEntity {
 
       return null;
     }
+
+    public static Status findByText(String text) {
+      for (Status status : Status.values()) {
+        if (status.text.equals(text)) {
+          return status;
+        }
+      }
+
+      return null;
+    }
+
   }
 }

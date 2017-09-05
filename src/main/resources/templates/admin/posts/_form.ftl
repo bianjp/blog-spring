@@ -1,7 +1,7 @@
 <#-- @ftlvariable name="post" type="com.bianjp.blog.entity.Post" -->
 <form action="/admin/posts${post.newRecord?then("", "/${post.id}")}"
-      method="${post.newRecord?then("POST", "PUT")}"
       class="ui form ajax-submit">
+  <input type="hidden" id="_method" value="${post.newRecord?then("POST", "PUT")}">
   <div class="field">
     <label for="title">Title</label>
     <input type="text" name="title" id="title" placeholder="Title" required autofocus value="${post.title!''}">
@@ -15,21 +15,37 @@
     <textarea name="content" id="content" rows="20" required>${post.content!''}</textarea>
   </div>
 
-<#if post.newRecord || post.draft>
-  <div class="inline field">
-    <div class="ui checkbox">
-      <input type="checkbox" name="publish" id="publish" value="true" class="hidden" tabindex="0">
-      <label>Publish immediately</label>
+  <div class="inline fields">
+    <label>Status</label>
+  <#if post.newRecord || post.draft>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input type="radio" name="statusText" value="draft" checked>
+        <label>Draft</label>
+      </div>
     </div>
-  </div>
-<#else>
-  <div class="inline field">
-    <div class="ui checkbox">
-      <input type="checkbox" name="publish" id="publish" value="true" class="hidden" tabindex="0">
-      <label>Published</label>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input type="radio" name="statusText" value="published">
+        <label>Published</label>
+      </div>
     </div>
+  <#else>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input type="radio" name="statusText" value="published" ${post.published?then("checked", "")}>
+        <label>Published</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input type="radio" name="statusText" value="unpublished" ${post.published?then("", "checked")}>
+        <label>Unpublished</label>
+      </div>
+    </div>
+  </#if>
   </div>
-</#if>
+
   <div class="actions">
     <div class="ui hidden message"></div>
     <button type="submit" class="ui submit primary button">Save</button>

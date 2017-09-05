@@ -1,6 +1,7 @@
 package com.bianjp.blog.service;
 
 import com.bianjp.blog.entity.Post;
+import com.bianjp.blog.form.PostForm;
 import com.bianjp.blog.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -11,10 +12,15 @@ import java.util.List;
 
 @Service
 public class PostService {
-  @Autowired private PostRepository postRepository;
-
   private static List<Post.Status> normalStatuses =
       Arrays.asList(Post.Status.PUBLISHED, Post.Status.UNPUBLISHED);
+
+  private final PostRepository postRepository;
+
+  @Autowired
+  public PostService(PostRepository postRepository) {
+    this.postRepository = postRepository;
+  }
 
   public List<Post> findDrafts(Pageable pageable) {
     return postRepository.findAllByStatus(Post.Status.DRAFT, pageable);
@@ -30,5 +36,38 @@ public class PostService {
 
   public int countNormalPosts() {
     return postRepository.countAllByStatusIn(normalStatuses);
+  }
+
+  public Post create(PostForm postForm) {
+    Post post = new Post();
+    post.setTitle(postForm.getTitle());
+    post.setSlug(postForm.getSlug());
+    post.setContent(postForm.getContent());
+    post.setStatus(postForm.getStatus());
+
+    if (post.isPublished()) {
+      post.initPublishDate();
+    }
+
+    postRepository.save(post);
+    return post;
+  }
+
+  public void update(Post post, PostForm postForm) {
+    post.setTitle(postForm.getTitle());
+    post.setSlug(postForm.getSlug());
+    post.setContent(postForm.getContent());
+    post.setStatus(postForm.getStatus());
+
+    if (post.isPublished()) {
+      post.initPublishDate();
+    }
+
+    postRepository.save(post);
+  }
+
+  public void logicalDelete(Post post) {
+    post.setStatus(Post.Status.DELETED);
+    postRepository.save(post);
   }
 }

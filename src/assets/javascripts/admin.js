@@ -18,6 +18,15 @@ $('.ui.checkbox').checkbox();
   });
 }());
 
+function form2JSON(form) {
+  form = $(form);
+  var obj = {};
+  form.serializeArray().forEach(function (pair) {
+    obj[pair.name] = pair.value;
+  });
+  return JSON.stringify(obj);
+}
+
 // Using AJAX to submit form
 (function () {
   var $form = $('form.ajax-submit');
@@ -37,10 +46,10 @@ $('.ui.checkbox').checkbox();
     }
 
     $.ajax({
-      url: $form[0].action,
-      method: $form[0].method,
-      data: new FormData($form[0]),
-      contentType: false,
+      url: $form.attr('action'),
+      method: $form.find('#_method').val() || 'POST',
+      data: form2JSON($form),
+      contentType: 'application/json',
       processData: false,
       dataType: 'json',
       timeout: 5000,
