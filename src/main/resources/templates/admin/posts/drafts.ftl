@@ -38,4 +38,5 @@
   </tr>
   </tfoot>
 </table>
+  <#include "_delete_confirmation_modal.ftl">
 </@layout.layout>

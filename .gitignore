@@ -27,6 +27,8 @@ nbdist/
 /src/main/resources/application-local.yml
 
 /log
+/logs
 
 /node_modules
 /npm-debug.log
+/yarn-error.log

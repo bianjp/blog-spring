@@ -1,0 +1,43 @@
+body > .flash-prompt {
+  position: fixed;
+  top: 30%;
+  left: 14px;
+  right: 14px;
+  text-align: center;
+  background-color: transparent;
+  animation: flash 4s linear;
+  z-index: 10000;
+}
+
+body > .flash-prompt span {
+  display: inline-block;
+  padding: 10px 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #fff;
+  background-color: #000;
+  border-radius: 8px;
+}
+
+body > .flash-prompt span.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.8;
+  }
+
+  80% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

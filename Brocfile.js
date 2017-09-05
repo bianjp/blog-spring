@@ -3,6 +3,7 @@ const autoprefixer = require('broccoli-autoprefixer');
 const mergeTrees = require('broccoli-merge-trees');
 const AssetRev = require('broccoli-asset-rev');
 const uglify = require('broccoli-uglify-sourcemap');
+const concat = require('broccoli-concat');
 
 const isProduction = process.argv[2] === 'build';
 
@@ -11,7 +12,7 @@ const javascriptsDir = 'src/assets/javascripts';
 const imagesDir = 'src/assets/images';
 
 var stylesheetTrees;
-var javascriptTree = javascriptsDir;
+var javascriptTrees = [];
 var imageTree = imagesDir;
 
 const stylesheetsFiles = [
@@ -19,6 +20,14 @@ const stylesheetsFiles = [
   'login',
   'admin',
 ];
+
+const javascriptFiles = {
+  'admin.js': [
+    'admin/lib/**/*.js',
+    'admin/global/**/*.js',
+    'admin/**/*.js',
+  ]
+};
 
 const sassOptions = {
   outputStyle: isProduction ? 'compressed' : 'expanded',
@@ -36,12 +45,21 @@ stylesheetTrees = stylesheetsFiles.map(function (filename) {
   return autoprefixer(tree, autoprefixerOptions);
 });
 
-// Compress javascripts
-if (isProduction) {
-  javascriptTree = uglify(javascriptTree);
+for (var outputFile in javascriptFiles) {
+  javascriptTrees.push(concat(javascriptsDir, {
+    outputFile: outputFile,
+    inputFiles: javascriptFiles[outputFile],
+  }));
 }
 
-var resultTree = mergeTrees([javascriptTree, imageTree].concat(stylesheetTrees));
+// Compress javascripts
+if (isProduction) {
+  javascriptTrees = javascriptTrees.map(function (tree) {
+    return uglify(tree);
+  });
+}
+
+var resultTree = mergeTrees([imageTree].concat(stylesheetTrees).concat(javascriptTrees));
 
 // Add checksum to file names
 if (isProduction) {
