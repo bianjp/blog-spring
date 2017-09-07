@@ -3,8 +3,11 @@ package com.bianjp.blog.service;
 import com.bianjp.blog.entity.Post;
 import com.bianjp.blog.form.PostForm;
 import com.bianjp.blog.repository.PostRepository;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -36,6 +39,17 @@ public class PostService {
 
   public int countNormalPosts() {
     return postRepository.countAllByStatusIn(normalStatuses);
+  }
+
+  public Post findPublishedPost(LocalDate publishDate, String slug) {
+    return postRepository.findByPublishDateAndSlugAndStatus(
+        publishDate, slug, Post.Status.PUBLISHED);
+  }
+
+  public List<Post> findLatestPublishedPosts(int count) {
+    Sort sort = new Sort(Sort.Direction.DESC, "id");
+    PageRequest pageRequest = new PageRequest(0, count, sort);
+    return postRepository.findAllByStatus(Post.Status.PUBLISHED, pageRequest);
   }
 
   public Post create(PostForm postForm) {

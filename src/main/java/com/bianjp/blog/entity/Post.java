@@ -31,6 +31,7 @@ public class Post extends BaseEntity {
   private String content;
 
   private String contentHtml;
+  private String excerpt;
 
   @Convert(converter = PostStatusConverter.class)
   private Status status = Status.DRAFT;
@@ -66,6 +67,7 @@ public class Post extends BaseEntity {
   public void setContent(String content) {
     this.content = content;
     this.contentHtml = Markdown2HTML.render(content);
+    this.excerpt = Markdown2HTML.renderExcerpt(content);
   }
 
   public String getContentHtml() {
@@ -74,6 +76,14 @@ public class Post extends BaseEntity {
 
   public void setContentHtml(String contentHtml) {
     this.contentHtml = contentHtml;
+  }
+
+  public String getExcerpt() {
+    return excerpt;
+  }
+
+  public void setExcerpt(String excerpt) {
+    this.excerpt = excerpt;
   }
 
   public Status getStatus() {
@@ -188,6 +198,5 @@ public class Post extends BaseEntity {
 
       return null;
     }
-
   }
 }
