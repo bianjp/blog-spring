@@ -39,4 +39,9 @@ public class HomeController {
     model.addAttribute("post", post);
     return "frontend/post";
   }
+
+  @GetMapping("/about")
+  public String about() {
+    return "frontend/about";
+  }
 }
