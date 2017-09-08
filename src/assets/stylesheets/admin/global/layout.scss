@@ -1,13 +1,62 @@
+$page-header-height: 50px;
+$page-sidebar-width: 200px;
+
 body {
   min-height: 100%;
+  padding-top: $page-header-height;
+  padding-left: $page-sidebar-width;
 }
 
-$page-sidebar-width: 200px;
+.page-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  padding-right: 30px;
+  height: $page-header-height;
+  justify-content: space-between;
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  background-color: #fff;
+  z-index: 1000;
+
+  .logo-container {
+    display: flex;
+    width: $page-sidebar-width;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: #1b1c1d;
+
+    .logo {
+      height: $page-header-height * 0.5;
+    }
+
+    .title {
+      margin-left: 10px;
+      font-size: 1.5em;
+      color: #fff;
+    }
+  }
+
+  .ui.dropdown {
+    display: flex;
+    align-items: center;
+
+    .text, .icon {
+      font-size: 1.2em;
+    }
+
+    .icon {
+      margin-left: 0.5em;
+    }
+  }
+}
 
 .page-sidebar {
   position: fixed;
   left: 0;
-  top: 0;
+  top: $page-header-height;
   bottom: 0;
   width: $page-sidebar-width !important;
   margin: 0 !important;
@@ -15,6 +64,5 @@ $page-sidebar-width: 200px;
 }
 
 .page-main {
-  margin-left: $page-sidebar-width;
   padding: 10px 20px;
 }

@@ -16,6 +16,7 @@ function form2JSON(form) {
 
   var $button = $form.find('.actions button[type=submit]');
   var $message = $form.find('.actions .message');
+  var transferFormat = $form.find('#transfer-format').val() || 'json';
 
   $form.on('submit', function (event) {
     event.preventDefault();
@@ -25,17 +26,19 @@ function form2JSON(form) {
       $message.transition('slide down');
     }
 
-    $.ajax({
+    var ajaxOptions = {
       url: $form.attr('action'),
       method: $form.find('#_method').val() || 'POST',
-      data: form2JSON($form),
-      contentType: 'application/json',
-      processData: false,
       dataType: 'json',
       timeout: 5000,
       success: function (data) {
         if (data.code === 0) {
-          $message.removeClass('error').addClass('success').text('Saved successfully');
+          $message.removeClass('error').addClass('success').text(data.msg || 'Saved successfully');
+          if (data.data.url) {
+            setTimeout(function () {
+              window.location.href = data.data.url;
+            }, 1000);
+          }
         } else {
           $message.removeClass('success').addClass('error').text(data && data.msg || 'Failed to save');
         }
@@ -52,6 +55,23 @@ function form2JSON(form) {
         $button.removeClass('loading');
         $message.transition('slide down');
       }
-    });
+    };
+
+    switch (transferFormat) {
+      case 'form':
+        ajaxOptions.data = $form.serialize();
+        break;
+      case 'multipart':
+        ajaxOptions.data = new FormData($form[0]);
+        ajaxOptions.contentType = false;
+        ajaxOptions.processData = false;
+        break;
+      case 'json':
+        ajaxOptions.data = form2JSON($form);
+        ajaxOptions.contentType = 'application/json';
+        ajaxOptions.processData = false;
+    }
+
+    $.ajax(ajaxOptions);
   });
 }());
