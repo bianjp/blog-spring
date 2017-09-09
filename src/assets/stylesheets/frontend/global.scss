@@ -6,3 +6,26 @@ body > main.ui.container {
   padding-top: 65px;
   padding-bottom: 20px;
 }
+
+.error-page {
+  .ui.segment {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+  }
+
+  .ui.header {
+    font-size: 5rem;
+    text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    .ui.segment {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    .ui.header {
+      font-size: 3rem;
+    }
+  }
+}
