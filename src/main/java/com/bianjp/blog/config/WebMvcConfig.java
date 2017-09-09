@@ -8,14 +8,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
   private final AssetConfig assetConfig;
+  private final UploadProperties uploadProperties;
 
   @Autowired
-  public WebMvcConfig(AssetConfig assetConfig) {
+  public WebMvcConfig(AssetConfig assetConfig, UploadProperties uploadProperties) {
     this.assetConfig = assetConfig;
+    this.uploadProperties = uploadProperties;
   }
 
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry
+        .addResourceHandler("/uploads/**")
+        .addResourceLocations(uploadProperties.getStorageDirUri())
+        .setCachePeriod(3600 * 24);
+
     if (assetConfig.isDevelopment()) {
       registry
           .addResourceHandler("/assets/**")
