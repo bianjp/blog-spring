@@ -5,6 +5,10 @@ public class JSONReplyDTO {
   private String msg = HttpStatus.OK.getMsg();
   private Object data;
 
+  public static JSONReplyDTO success(String msg) {
+    return new JSONReplyDTO(HttpStatus.OK.getCode(), msg);
+  }
+
   public static JSONReplyDTO success(String msg, Object data) {
     return new JSONReplyDTO(HttpStatus.OK.getCode(), msg, data);
   }

@@ -34,7 +34,7 @@ function form2JSON(form) {
       success: function (data) {
         if (data.code === 0) {
           $message.removeClass('error').addClass('success').text(data.msg || 'Saved successfully');
-          if (data.data.url) {
+          if (data.data && data.data.url) {
             setTimeout(function () {
               window.location.href = data.data.url;
             }, 1000);

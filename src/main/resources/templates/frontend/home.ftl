@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="ui divider"></div>
-    <div>${post.excerpt}</div>
+    <div class="post-content">${post.excerpt}</div>
     <a class="read-more" href="/posts/${post.prettyUrl}">Read more >></a>
   </section>
   </#list>

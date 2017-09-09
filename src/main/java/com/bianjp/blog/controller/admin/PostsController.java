@@ -93,7 +93,7 @@ public class PostsController {
 
     postService.create(postForm);
 
-    return new JSONReplyDTO();
+    return JSONReplyDTO.success("Created successfully");
   }
 
   // API: Update post
@@ -108,7 +108,7 @@ public class PostsController {
 
     postService.update(post, postForm);
 
-    return new JSONReplyDTO();
+    return JSONReplyDTO.success("Updated successfully");
   }
 
   // API: Delete post

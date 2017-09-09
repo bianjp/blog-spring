@@ -13,6 +13,6 @@
       </div>
     </div>
     <div class="ui divider"></div>
-    <div>${post.contentHtml}</div>
+    <div class="post-content">${post.contentHtml}</div>
   </article>
 </@layout.layout>

@@ -16,3 +16,14 @@
   display: inline-block;
   margin-top: 10px;
 }
+
+.post-content {
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+  }
+
+  pre {
+    overflow: auto;
+  }
+}
