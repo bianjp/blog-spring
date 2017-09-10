@@ -1,11 +1,15 @@
 package com.bianjp.blog.entity_helper;
 
 import org.joda.time.DateTime;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public class BaseEntity implements Serializable {
   private static final long serialVersionUID = 100L;
 
@@ -14,9 +18,11 @@ public class BaseEntity implements Serializable {
   protected Integer id;
 
   @Convert(converter = DateTimeConverter.class)
+  @LastModifiedDate
   protected DateTime updatedAt;
 
   @Convert(converter = DateTimeConverter.class)
+  @CreatedDate
   protected DateTime createdAt;
 
   public Integer getId() {
@@ -45,13 +51,5 @@ public class BaseEntity implements Serializable {
 
   public boolean isNewRecord() {
     return id == null || id == 0;
-  }
-
-  @PrePersist
-  public void prePersist() {
-    if (isNewRecord()) {
-      createdAt = new DateTime();
-    }
-    updatedAt = new DateTime();
   }
 }

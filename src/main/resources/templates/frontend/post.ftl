@@ -9,7 +9,7 @@
         <i class="calendar icon" title="Posted on"></i>${post.publishDate.toString('MMM d, YYYY')}
       </div>
       <div class="item">
-        <i class="edit icon" title="Last updated on"></i>${post.updatedAt.toString('MMM d, YYYY')}
+        <i class="edit icon" title="Last updated on"></i>${post.updatedAt.toString('MMM d, YYYY zz')}
       </div>
     </div>
     <div class="ui divider"></div>
