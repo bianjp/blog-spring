@@ -16,11 +16,17 @@ import java.util.Map;
 @Component
 public class AssetPathHelper implements TemplateMethodModelEx {
   static class Manifest {
-    Map<String, String> assets;
-    String prepend;
+    // Must be public to allow ObjectMapper to access without getter/setter
+    public Map<String, String> assets;
+    public String prepend;
   }
 
-  @Autowired private AssetConfig assetConfig;
+  private final AssetConfig assetConfig;
+
+  @Autowired
+  public AssetPathHelper(AssetConfig assetConfig) {
+    this.assetConfig = assetConfig;
+  }
 
   @Value("classpath:assets/manifest.json")
   private Resource manifestResource;
