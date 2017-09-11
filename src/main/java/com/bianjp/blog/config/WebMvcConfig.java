@@ -26,9 +26,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     if (assetConfig.isDevelopment()) {
       registry
           .addResourceHandler("/assets/**")
-          .setCachePeriod(0)
-          .resourceChain(false)
-          .addResolver(new AssetUpstreamResolver(assetConfig));
+          .addResourceLocations(assetConfig.getUpstream())
+          .setCachePeriod(0);
     } else {
       registry
           .addResourceHandler("/assets/**")
