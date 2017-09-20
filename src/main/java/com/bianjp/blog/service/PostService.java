@@ -46,6 +46,10 @@ public class PostService {
         publishDate, slug, Post.Status.PUBLISHED);
   }
 
+  public Post findPublishedPost(int id) {
+    return postRepository.findByIdAndStatus(id, Post.Status.PUBLISHED);
+  }
+
   public List<Post> findLatestPublishedPosts(int count) {
     Sort sort = new Sort(Sort.Direction.DESC, "id");
     PageRequest pageRequest = new PageRequest(0, count, sort);

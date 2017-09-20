@@ -15,4 +15,6 @@
     <div class="ui divider"></div>
     <div class="post-content">${post.contentHtml}</div>
   </article>
+
+  <#include "included/disqus.ftl">
 </@layout.layout>

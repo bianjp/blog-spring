@@ -20,4 +20,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
   int countAllByStatusIn(Collection<Post.Status> statuses);
 
   Post findByPublishDateAndSlugAndStatus(LocalDate publishDate, String slug, Post.Status status);
+
+  Post findByIdAndStatus(int id, Post.Status status);
 }

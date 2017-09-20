@@ -15,7 +15,7 @@
   <div class="ui container">
     <a class="item"><img src="${assetPath('logo.png')}" alt="LOGO"></a>
     <a class="item ${(request.requestUri == "/")?then("active", "")}" href="/">Home</a>
-    <a class="item ${(request.requestUri == "/about")?then("active", "")}"" href="/about">About</a>
+    <a class="item ${(request.requestUri == "/about")?then("active", "")}" href="/about">About</a>
   </div>
 </header>
 
