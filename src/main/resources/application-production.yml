@@ -1,2 +1,6 @@
 assets:
   development: false
+
+logging:
+  config: classpath:log4j2-production.xml
+  path: log
