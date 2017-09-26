@@ -3,34 +3,54 @@ package com.bianjp.blog.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.PostConstruct;
-
 @Configuration
 @ConfigurationProperties(prefix = "assets")
 public class AssetConfig {
-  private boolean development = true;
-  private String upstream = "http://127.0.0.1:4200/";
+  private final Broccoli broccoli = new Broccoli();
 
-  public boolean isDevelopment() {
-    return development;
+  public Broccoli getBroccoli() {
+    return broccoli;
   }
 
-  public void setDevelopment(boolean development) {
-    this.development = development;
+  public boolean isDevelopment() {
+    return broccoli.enabled;
   }
 
   public String getUpstream() {
-    return upstream;
+    return broccoli.getUrl();
   }
 
-  public void setUpstream(String upstream) {
-    this.upstream = upstream;
-  }
+  public static class Broccoli {
+    private boolean enabled = false;
+    private String host = "localhost";
+    private int port = 4200;
 
-  @PostConstruct
-  public void formalizeProperties() {
-    if (!upstream.endsWith("/")) {
-      upstream = upstream + "/";
+    public boolean isEnabled() {
+      return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+      this.enabled = enabled;
+    }
+
+    public String getHost() {
+      return host;
+    }
+
+    public void setHost(String host) {
+      this.host = host;
+    }
+
+    public int getPort() {
+      return port;
+    }
+
+    public void setPort(int port) {
+      this.port = port;
+    }
+
+    public String getUrl() {
+      return "http://" + host + ":" + port + "/";
     }
   }
 }

@@ -10,11 +10,9 @@ A blog site written in Spring Boot. Used by [https://bianjp.com](https://bianjp.
 
 Extra development/building requirement:
 
-* Linux
 * Node.js >= 6
 * [Yarn](https://yarnpkg.com/en/)
 * [broccoli-cli](https://github.com/broccolijs/broccoli-cli)
-* [inotify-tools](https://github.com/rvoicilas/inotify-tools)
 
 ## Configuration
 
@@ -32,13 +30,13 @@ Only save common and non-sensitive configurations in `src/main/resource/applicat
 Local specific or sensitive configuration (eg: database password) can be passed in the following ways:
 
 * `src/main/resource/config/application-{profile}.yml`: Git ignored, will be included in packaged jar
-* `application-{profile}.yml` or `config/application-{profile}.yml` in working directory (it's project root in development environment): Git ignored, will not be included in packaged jar 
+* `application-{profile}.yml` or `config/application-{profile}.yml` in working directory (it's project root in development environment): Git ignored, will not be included in packaged jar
 * os environment variable
 * Java system properties specified in command line
 * command line arguments
 
 For example, to specify redis host and datasource url by command line arguments:
- 
+
 ```bash
 java -jar build/libs/blog-spring-0.1.0-SNAPSHOT.jar --spring.profiles.active=production --spring.redis.host=127.0.0.1 --spring.datasource.url=jdbc:postgresql://localhost/blog
 ```
@@ -55,13 +53,15 @@ Create an empty database, and [Flyway](https://flywaydb.org/) will take care of 
 
 ### Development
 
-Run the following command in the project root directory to serve assets:
+Install npm dependencies if you haven't:
 
 ```bash
-./assets.sh
+yarn install
 ```
 
-And then start Spring Boot in your IDE or using gradle (`./gradlew bootRun`).
+Then just start Spring Boot in your IDE or using gradle (`./gradlew bootRun`).
+
+By default `BroccoliServer` will start a `broccoli serve` process listening on localhost:4200. Change `assets.*` properties as needed.
 
 ### Production
 
@@ -72,7 +72,7 @@ java -jar build/libs/blog-spring-0.1.0-SNAPSHOT.jar --spring.profiles.active=pro
 
 #### Systemd
 
-If you just need a single instance, using systemd is a good idea. 
+If you just need a single instance, using systemd is a good idea.
 
 Create `/etc/systemd/system/blog.service`:
 

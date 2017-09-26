@@ -57,8 +57,10 @@ management:
     roles: ADMIN
 
 assets:
-  development: true
-  upstream: http://127.0.0.1:4200/
+  broccoli:
+    enabled: false
+    host: localhost
+    port: 4200
 
 blog:
   title: "bianjp's Blog"

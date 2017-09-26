@@ -46,8 +46,15 @@ dependencies {
 
 }
 
-task assetCompile(type: Exec) {
-    commandLine './assets.sh', 'build'
+task assetClean(type: Delete, group: 'assets') {
+    description 'Clean built assets'
+    delete 'build/assets'
+}
+
+task assetCompile(type: Exec, group: 'assets') {
+    description 'Compile assets'
+    dependsOn assetClean
+    commandLine 'broccoli', 'build', 'build/assets'
 }
 
 jar.dependsOn assetCompile
