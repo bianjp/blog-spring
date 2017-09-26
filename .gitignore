@@ -24,7 +24,8 @@ dist/
 nbdist/
 .nb-gradle/
 
-/src/main/resources/application-local.yml
+/src/main/resources/config/application*.yml
+/application*.yml
 
 /log
 /logs

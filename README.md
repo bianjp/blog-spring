@@ -22,19 +22,28 @@ Extra development/building requirement:
 
 [Spring Profiles](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-profiles) are used to separate configurations for different environments.
 
-This project has 3 profiles:
+This project has two profiles:
 
 * development: Used for development environment
 * production: Used for production environment
-* local: Git-ignored. Used to override development/production configuration, or to save sensitive information (eg. database password) 
 
-If you are running a pre-packaged jar, you may have to use environment variable or command line arguments to override configurations. For example:
+Only save common and non-sensitive configurations in `src/main/resource/application-{profile}.yml` files.
 
+Local specific or sensitive configuration (eg: database password) can be passed in the following ways:
+
+* `src/main/resource/config/application-{profile}.yml`: Git ignored, will be included in packaged jar
+* `application-{profile}.yml` or `config/application-{profile}.yml` in working directory (it's project root in development environment): Git ignored, will not be included in packaged jar 
+* os environment variable
+* Java system properties specified in command line
+* command line arguments
+
+For example, to specify redis host and datasource url by command line arguments:
+ 
 ```bash
-java -jar build/libs/blog-spring-0.1.0-SNAPSHOT.jar --spring.profiles.active=production,local --spring.redis.host=127.0.0.1
+java -jar build/libs/blog-spring-0.1.0-SNAPSHOT.jar --spring.profiles.active=production --spring.redis.host=127.0.0.1 --spring.datasource.url=jdbc:postgresql://localhost/blog
 ```
 
-__Don't forget to add "local" to active profiles if you depend on it.__
+See [Externalized Configuration](https://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/reference/htmlsingle/#boot-features-external-config) for more details about configuration methods and precedence.
 
 ### Minimal configuration
 
@@ -58,7 +67,33 @@ And then start Spring Boot in your IDE or using gradle (`./gradlew bootRun`).
 
 ```bash
 ./gradlew build
-java -jar build/libs/blog-spring-0.1.0-SNAPSHOT.jar --spring.profiles.active=production,local
+java -jar build/libs/blog-spring-0.1.0-SNAPSHOT.jar --spring.profiles.active=production
+```
+
+#### Systemd
+
+If you just need a single instance, using systemd is a good idea. 
+
+Create `/etc/systemd/system/blog.service`:
+
+```
+[Unit]
+Description=Blog site
+After=syslog.target
+
+[Service]
+User=YOUR_NORMAL_USER
+WorkingDirectory=/path/to/working-directory
+ExecStart=/usr/bin/java -jar /path/to/blog-0.1.0-SNAPSHOT.jar --spring.profiles.active=production --server.port=8080
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+sudo systemctl start blog
+sudo systemctl enable blog
 ```
 
 ## License

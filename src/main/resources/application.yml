@@ -8,7 +8,7 @@ spring:
     name: blog
 
   profiles:
-    active: development,local
+    active: development
 
   jpa:
     database: postgresql
@@ -18,16 +18,9 @@ spring:
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
 
-#  # save in application-local.yml to avoid occasionally commit password into repository
-#  datasource:
-#    url: 'jdbc:postgresql://localhost/blog'
-#    username:
-#    password:
-
-  redis:
-    database: 0
-    host: ${REDIS_HOST:127.0.0.1}
-    port: ${REDIS_PORT:6379}
+  # Note: do not save password in git tracked files
+  datasource:
+    url: 'jdbc:postgresql://localhost/blog'
 
   session:
     # https://github.com/spring-projects/spring-session/blob/master/docs/src/docs/asciidoc/guides/boot-redis.adoc
