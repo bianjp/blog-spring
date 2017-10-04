@@ -1,12 +1,12 @@
 package com.bianjp.blog.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 
-@Configuration
+@Component
 @ConfigurationProperties(prefix = "uploads")
 public class UploadProperties {
   private String storageDir;

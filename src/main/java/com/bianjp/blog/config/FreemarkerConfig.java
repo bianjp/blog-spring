@@ -2,7 +2,6 @@ package com.bianjp.blog.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
@@ -12,15 +11,20 @@ import java.util.Map;
 @Configuration
 public class FreemarkerConfig extends FreeMarkerAutoConfiguration.FreeMarkerWebConfiguration {
 
-  @Autowired private ApplicationContext context;
+  private final BlogProperties blogProperties;
+  private final AssetPathHelper assetPathHelper;
 
-  @Autowired private BlogProperties blogProperties;
+  @Autowired
+  public FreemarkerConfig(BlogProperties blogProperties, AssetPathHelper assetPathHelper) {
+    this.blogProperties = blogProperties;
+    this.assetPathHelper = assetPathHelper;
+  }
 
   @Override
   public FreeMarkerConfigurer freeMarkerConfigurer() {
     FreeMarkerConfigurer configurer = super.freeMarkerConfigurer();
     Map<String, Object> sharedVariables = new HashMap<>();
-    sharedVariables.put("assetPath", context.getBean(AssetPathHelper.class));
+    sharedVariables.put("assetPath", assetPathHelper);
     sharedVariables.put("blog", blogProperties);
     configurer.setFreemarkerVariables(sharedVariables);
 

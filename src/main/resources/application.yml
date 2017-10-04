@@ -1,4 +1,6 @@
 server:
+  # https://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/reference/htmlsingle/#howto-use-tomcat-behind-a-proxy-server
+  use-forward-headers: true
   session:
     persistent: true
     timeout: 7200
