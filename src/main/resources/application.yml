@@ -11,6 +11,7 @@ spring:
 
   profiles:
     active: development
+    include: assets
 
   jpa:
     database: postgresql
@@ -59,6 +60,10 @@ management:
     roles: ADMIN
 
 assets:
+  cdn:
+    enabled: true
+    provider: cdnjs
+
   broccoli:
     enabled: false
     host: localhost

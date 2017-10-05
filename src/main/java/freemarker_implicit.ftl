@@ -6,3 +6,5 @@
 [#-- @ftlvariable name="request" type="org.springframework.web.servlet.support.RequestContext" --]
 
 [#function assetPath path][/#function]
+[#function javascript lib][/#function]
+[#function stylesheet lib][/#function]

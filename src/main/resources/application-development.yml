@@ -3,5 +3,8 @@ management:
     enabled: false
 
 assets:
+  cdn:
+    enabled: false
+
   broccoli:
     enabled: true

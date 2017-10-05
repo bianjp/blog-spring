@@ -1,5 +1,6 @@
-package com.bianjp.blog.config;
+package com.bianjp.blog.config.freemarker;
 
+import com.bianjp.blog.config.AssetConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.SimpleScalar;
 import freemarker.template.TemplateMethodModelEx;

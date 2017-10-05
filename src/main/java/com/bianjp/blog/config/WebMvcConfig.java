@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.io.File;
+
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
   private final AssetConfig assetConfig;
@@ -22,6 +24,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         .addResourceHandler("/uploads/**")
         .addResourceLocations(uploadProperties.getStorageDirUri())
         .setCachePeriod(3600 * 24);
+
+    if (!assetConfig.getCdn().isEnabled()) {
+      registry
+          .addResourceHandler("/npm-assets/**")
+          .addResourceLocations(new File("node_modules").toURI().toString())
+          .setCachePeriod(0);
+    }
 
     if (assetConfig.isDevelopment()) {
       registry

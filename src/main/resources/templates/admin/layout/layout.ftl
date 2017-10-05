@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>${pageTitle} - ${blog.title}</title>
   <link rel="icon" href="${assetPath('favicon.png')}">
-  <link rel="stylesheet" href="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.css">
+  ${stylesheet('semantic-ui')}
   <link rel="stylesheet" href="${assetPath('admin.css')}">
 </head>
 <body class="${bodyClass}">
@@ -37,8 +37,8 @@
   <#nested/>
 </main>
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.js"></script>
+${javascript('jquery')}
+${javascript('semantic-ui')}
 <script src="${assetPath('admin.js')}"></script>
 </body>
 </html>

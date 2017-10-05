@@ -1,0 +1,20 @@
+assets:
+  cdn:
+    available-providers:
+      # name => root url
+      bootcdn: http://www.bootcdn.cn/
+      cdnjs: https://cdnjs.cloudflare.com/ajax/libs/
+
+  cdn-path:
+    jquery:
+      - jquery/3.2.1/jquery.min.js
+    semantic-ui:
+      - semantic-ui/2.2.13/semantic.min.css
+      - semantic-ui/2.2.13/semantic.min.js
+
+  npm-path:
+    jquery:
+      - jquery/dist/jquery.min.js
+    semantic-ui:
+      - semantic-ui-css/semantic.min.css
+      - semantic-ui-css/semantic.min.js
