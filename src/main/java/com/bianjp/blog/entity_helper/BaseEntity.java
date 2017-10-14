@@ -49,6 +49,7 @@ public class BaseEntity implements Serializable {
     this.updatedAt = updatedAt;
   }
 
+  @Transient
   public boolean isNewRecord() {
     return id == null || id == 0;
   }
