@@ -12,11 +12,13 @@ repositories {
 }
 
 configurations {
-    all*.exclude module: 'spring-boot-starter-logging'
+    compile.exclude module: 'spring-boot-starter-logging'
+    compile.exclude module: "spring-boot-starter-tomcat"
 }
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
+    compile("org.springframework.boot:spring-boot-starter-jetty")
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-aop')
     compile('org.springframework.boot:spring-boot-starter-cache')
@@ -56,6 +58,9 @@ task assetCompile(type: Exec, group: 'assets') {
     dependsOn assetClean
     commandLine 'broccoli', 'build', 'build/assets'
 }
+
+// Without this directive any additional-spring-configuration-metadata.json files will not be processed
+compileJava.dependsOn(processResources)
 
 jar.dependsOn assetCompile
 jar.from 'build/assets', { into 'assets' }
