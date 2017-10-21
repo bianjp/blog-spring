@@ -8,3 +8,7 @@ assets:
 
   broccoli:
     enabled: true
+
+blog:
+  disqus:
+    enabled: false

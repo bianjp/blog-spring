@@ -70,7 +70,11 @@ assets:
     port: 4200
 
 blog:
+  host: https://bianjp.com
   title: "bianjp's Blog"
+  disqus:
+    enabled: true
+    shortname: bianjp-blog
 
 uploads:
   storage-dir: uploads
