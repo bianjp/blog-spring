@@ -8,12 +8,13 @@
   <title><#if pageTitle?has_content>${pageTitle} - </#if>${blog.title}</title>
   <link rel="icon" href="${assetPath('favicon.png')}">
   ${stylesheet('semantic-ui')}
+  ${stylesheet('highlight-js')}
   <link rel="stylesheet" href="${assetPath('application.css')}">
 </head>
 <body class="${bodyClass}">
 <header class="ui top fixed borderless menu">
   <div class="ui container">
-    <a class="item"><img src="${assetPath('logo.png')}" alt="LOGO"></a>
+    <a class="item" href="/"><img src="${assetPath('logo.png')}" alt="LOGO"></a>
     <a class="item ${(request.requestUri == "/")?then("active", "")}" href="/">Home</a>
     <a class="item ${(request.requestUri == "/about")?then("active", "")}" href="/about">About</a>
   </div>
@@ -25,6 +26,8 @@
 
 ${javascript('jquery')}
 ${javascript('semantic-ui')}
+${javascript('highlight-js')}
+<script src="${assetPath('application.js')}"></script>
 </body>
 </html>
 </#macro>

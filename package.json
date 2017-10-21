@@ -5,6 +5,7 @@
   "author": "Bian Jiaping <ssbianjp@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "highlight.js-cdn": "highlightjs/cdn-release",
     "jquery": "^3.2.1",
     "semantic-ui-css": "^2.2.12"
   },

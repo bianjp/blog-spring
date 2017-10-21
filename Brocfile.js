@@ -26,7 +26,11 @@ const javascriptFiles = {
     'admin/lib/**/*.js',
     'admin/global/**/*.js',
     'admin/**/*.js',
-  ]
+  ],
+  'application.js': [
+    'frontend/global/**/*.js',
+    'frontend/**/*.js',
+  ],
 };
 
 const sassOptions = {

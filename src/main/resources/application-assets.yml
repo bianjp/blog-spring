@@ -11,6 +11,33 @@ assets:
     semantic-ui:
       - semantic-ui/2.2.13/semantic.min.css
       - semantic-ui/2.2.13/semantic.min.js
+    highlight-js:
+      - highlight.js/9.12.0/styles/monokai.min.css
+      - highlight.js/9.12.0/highlight.min.js
+      - highlight.js/9.12.0/languages/bash.min.js
+      - highlight.js/9.12.0/languages/css.min.js
+      - highlight.js/9.12.0/languages/dockerfile.min.js
+      - highlight.js/9.12.0/languages/erb.min.js
+      - highlight.js/9.12.0/languages/gradle.min.js
+      - highlight.js/9.12.0/languages/groovy.min.js
+      - highlight.js/9.12.0/languages/http.min.js
+      - highlight.js/9.12.0/languages/ini.min.js
+      - highlight.js/9.12.0/languages/java.min.js
+      - highlight.js/9.12.0/languages/javascript.min.js
+      - highlight.js/9.12.0/languages/json.min.js
+      - highlight.js/9.12.0/languages/kotlin.min.js
+      - highlight.js/9.12.0/languages/livescript.min.js
+      - highlight.js/9.12.0/languages/makefile.min.js
+      - highlight.js/9.12.0/languages/markdown.min.js
+      - highlight.js/9.12.0/languages/nginx.min.js
+      - highlight.js/9.12.0/languages/php.min.js
+      - highlight.js/9.12.0/languages/python.min.js
+      - highlight.js/9.12.0/languages/ruby.min.js
+      - highlight.js/9.12.0/languages/scss.min.js
+      - highlight.js/9.12.0/languages/shell.min.js
+      - highlight.js/9.12.0/languages/sql.min.js
+      - highlight.js/9.12.0/languages/typescript.min.js
+      - highlight.js/9.12.0/languages/yaml.min.js
 
   npm-path:
     jquery:
@@ -18,3 +45,30 @@ assets:
     semantic-ui:
       - semantic-ui-css/semantic.min.css
       - semantic-ui-css/semantic.min.js
+    highlight-js:
+      - highlight.js-cdn/build/styles/monokai.min.css
+      - highlight.js-cdn/build/highlight.min.js
+      - highlight.js-cdn/build/languages/bash.min.js
+      - highlight.js-cdn/build/languages/css.min.js
+      - highlight.js-cdn/build/languages/dockerfile.min.js
+      - highlight.js-cdn/build/languages/erb.min.js
+      - highlight.js-cdn/build/languages/gradle.min.js
+      - highlight.js-cdn/build/languages/groovy.min.js
+      - highlight.js-cdn/build/languages/http.min.js
+      - highlight.js-cdn/build/languages/ini.min.js
+      - highlight.js-cdn/build/languages/java.min.js
+      - highlight.js-cdn/build/languages/javascript.min.js
+      - highlight.js-cdn/build/languages/json.min.js
+      - highlight.js-cdn/build/languages/kotlin.min.js
+      - highlight.js-cdn/build/languages/livescript.min.js
+      - highlight.js-cdn/build/languages/makefile.min.js
+      - highlight.js-cdn/build/languages/markdown.min.js
+      - highlight.js-cdn/build/languages/nginx.min.js
+      - highlight.js-cdn/build/languages/php.min.js
+      - highlight.js-cdn/build/languages/python.min.js
+      - highlight.js-cdn/build/languages/ruby.min.js
+      - highlight.js-cdn/build/languages/scss.min.js
+      - highlight.js-cdn/build/languages/shell.min.js
+      - highlight.js-cdn/build/languages/sql.min.js
+      - highlight.js-cdn/build/languages/typescript.min.js
+      - highlight.js-cdn/build/languages/yaml.min.js
