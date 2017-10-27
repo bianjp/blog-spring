@@ -1,5 +1,4 @@
-<#import "../layout/layout.ftl" as layout>
-<@layout.layout pageTitle="Profile">
+<@adminLayout.layout pageTitle="Profile">
 <h2>Profile</h2>
 <div class="ui form">
   <div class="inline field">
@@ -15,4 +14,4 @@
     <span>${currentUser.updatedAt.toString('YYYY-MM-dd HH:mm:ss')}</span>
   </div>
 </div>
-</@layout.layout>
+</@adminLayout.layout>

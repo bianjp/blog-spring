@@ -8,3 +8,7 @@
 [#function assetPath path][/#function]
 [#function javascript lib][/#function]
 [#function stylesheet lib][/#function]
+
+[#import "templates/helper/asset-helper.ftl" as assetHelper]
+[#import "templates/frontend/layout/layout.ftl" as layout]
+[#import "templates/admin/layout/layout.ftl" as adminLayout]

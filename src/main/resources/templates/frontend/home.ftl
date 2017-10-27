@@ -1,5 +1,4 @@
 <#-- @ftlvariable name="posts" type="java.util.List<com.bianjp.blog.entity.Post>" -->
-<#import "layout/layout.ftl" as layout>
 <#import "components/post_meta.ftl" as components>
 
 <@layout.layout pageTitle="" containerClass="posts">

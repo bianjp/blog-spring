@@ -2,9 +2,8 @@
 <#-- @ftlvariable name="totalPages" type="java.lang.Integer" -->
 <#-- @ftlvariable name="currentPage" type="java.lang.Integer" -->
 <#-- @ftlvariable name="pageLink" type="java.lang.String" -->
-<#import "../layout/layout.ftl" as layout>
-<#import "../helper/pagination.ftl" as helper>
-<@layout.layout pageTitle="Posts">
+<#import "../../helper/pagination.ftl" as helper>
+<@adminLayout.layout pageTitle="Posts">
 <h2>Posts</h2>
 
 <table class="ui table">
@@ -39,4 +38,4 @@
   </tfoot>
 </table>
   <#include "_delete_confirmation_modal.ftl">
-</@layout.layout>
+</@adminLayout.layout>

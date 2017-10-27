@@ -17,7 +17,7 @@
   </div>
 
   <div class="inline field">
-    <label for="tags">Tags</label>
+    <label>Tags</label>
     <div class="ui fluid multiple search selection dropdown" id="tags-input">
       <input type="hidden" name="tagsText" value="<#list post.tags as tag>${tag.name}<#sep>,</#list>">
       <i class="dropdown icon"></i>

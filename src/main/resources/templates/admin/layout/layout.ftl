@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>${pageTitle} - ${blog.title}</title>
   <link rel="icon" href="${assetPath('favicon.png')}">
-  ${stylesheet('semantic-ui')}
+  <@assetHelper.stylesheets 'semantic-ui'/>
   <link rel="stylesheet" href="${assetPath('admin.css')}">
 </head>
 <body class="${bodyClass}">
@@ -37,8 +37,8 @@
   <#nested/>
 </main>
 
-${javascript('jquery')}
-${javascript('semantic-ui')}
+<@assetHelper.javascripts 'jquery'/>
+<@assetHelper.javascripts 'semantic-ui'/>
 <script src="${assetPath('admin.js')}"></script>
 </body>
 </html>

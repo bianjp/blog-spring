@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><#if pageTitle?has_content>${pageTitle} - </#if>${blog.title}</title>
   <link rel="icon" href="${assetPath('favicon.png')}">
-  ${stylesheet('semantic-ui')}
-  ${stylesheet('highlight-js')}
+  <@assetHelper.stylesheets 'semantic-ui'/>
+  <@assetHelper.stylesheets 'highlight-js'/>
   <link rel="stylesheet" href="${assetPath('application.css')}">
 </head>
 <body class="${bodyClass}">
@@ -24,9 +24,9 @@
   <#nested>
 </main>
 
-${javascript('jquery')}
-${javascript('semantic-ui')}
-${javascript('highlight-js')}
+<@assetHelper.javascripts 'jquery'/>
+<@assetHelper.javascripts 'semantic-ui'/>
+<@assetHelper.javascripts 'highlight-js'/>
 <script src="${assetPath('application.js')}"></script>
 </body>
 </html>

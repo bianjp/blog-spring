@@ -1,5 +1,3 @@
-<#import "layout/layout.ftl" as layout>
-
 <@layout.layout pageTitle="About">
   <section class="ui very padded segment">
     <h1 class="ui header">About</h1>

@@ -1,5 +1,4 @@
-<#import "../layout/layout.ftl" as layout>
-<@layout.layout pageTitle="Profile">
+<@adminLayout.layout pageTitle="Profile">
 <h2>Change Password</h2>
 <form action="/admin/change-password" class="ui form change-password ajax-submit">
   <input type="hidden" id="transfer-format" value="form">
@@ -21,4 +20,4 @@
     <button type="submit" class="ui submit primary button">Save</button>
   </div>
 </form>
-</@layout.layout>
+</@adminLayout.layout>
