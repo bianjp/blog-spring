@@ -6,6 +6,7 @@ import com.bianjp.blog.form.PostForm;
 import com.bianjp.blog.repository.PostRepository;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -57,6 +58,10 @@ public class PostService {
     Sort sort = new Sort(Sort.Direction.DESC, "id");
     PageRequest pageRequest = new PageRequest(0, count, sort);
     return postRepository.findAllByStatus(Post.Status.PUBLISHED, pageRequest);
+  }
+
+  public Page<Post> findPublishedPostsByTag(Tag tag, Pageable pageable) {
+    return postRepository.findAllByTagsContainsAndStatus(tag, Post.Status.PUBLISHED, pageable);
   }
 
   public Post create(PostForm postForm) {

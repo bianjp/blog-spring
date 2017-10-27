@@ -26,3 +26,7 @@
     overflow: auto;
   }
 }
+
+.post + .pagination-container {
+  text-align: center;
+}

@@ -1,7 +1,9 @@
 package com.bianjp.blog.repository;
 
 import com.bianjp.blog.entity.Post;
+import com.bianjp.blog.entity.Tag;
 import org.joda.time.LocalDate;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -22,4 +24,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
   Post findByPublishDateAndSlugAndStatus(LocalDate publishDate, String slug, Post.Status status);
 
   Post findByIdAndStatus(int id, Post.Status status);
+
+  Page<Post> findAllByTagsContainsAndStatus(Tag tag, Post.Status status, Pageable pageable);
 }
