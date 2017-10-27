@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -52,5 +53,26 @@ public class BaseEntity implements Serializable {
   @Transient
   public boolean isNewRecord() {
     return id == null || id == 0;
+  }
+
+  @Override
+  public int hashCode() {
+    return id != null ? id.hashCode() : super.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    } else if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+
+    BaseEntity other = (BaseEntity) obj;
+    if (id == null && other.id == null) {
+      return super.equals(obj);
+    } else {
+      return Objects.equals(id, other.id);
+    }
   }
 }

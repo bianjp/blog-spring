@@ -5,6 +5,9 @@ import com.bianjp.blog.entity.Post;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class PostForm {
   @NotNull
@@ -20,7 +23,7 @@ public class PostForm {
   @Size(min = 1)
   private String content;
 
-  @NotNull private String statusText;
+  @NotNull private List<String> tags = new ArrayList<>();
 
   @NotNull private Post.Status status;
 
@@ -48,13 +51,12 @@ public class PostForm {
     this.content = content;
   }
 
-  public String getStatusText() {
-    return statusText;
+  public List<String> getTags() {
+    return tags;
   }
 
-  public void setStatusText(String statusText) {
-    this.statusText = statusText;
-    this.status = Post.Status.findByText(statusText);
+  public void setTags(List<String> tags) {
+    this.tags = tags;
   }
 
   public Post.Status getStatus() {
@@ -65,14 +67,41 @@ public class PostForm {
     this.status = status;
   }
 
+  public String getTagsText() {
+    return String.join(",", tags);
+  }
+
+  public void setTagsText(String tagsText) {
+    tags.clear();
+    if (tagsText != null && !tagsText.isEmpty()) {
+      Collections.addAll(tags, tagsText.split(","));
+    }
+  }
+
+  public String getStatusText() {
+    return status.getText();
+  }
+
+  public void setStatusText(String statusText) {
+    this.status = Post.Status.findByText(statusText);
+  }
+
   @Override
   public String toString() {
-    return "PostForm{" +
-      "title='" + title + '\'' +
-      ", slug='" + slug + '\'' +
-      ", content='" + content + '\'' +
-      ", statusText='" + statusText + '\'' +
-      ", status=" + status +
-      '}';
+    return "PostForm{"
+        + "title='"
+        + title
+        + '\''
+        + ", slug='"
+        + slug
+        + '\''
+        + ", content='"
+        + content
+        + '\''
+        + ", tags="
+        + tags
+        + ", status="
+        + status
+        + '}';
   }
 }

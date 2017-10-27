@@ -1,0 +1,21 @@
+DROP TABLE IF EXISTS tag;
+CREATE TABLE tag (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  post_count INTEGER NOT NULL DEFAULT 0,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS uk_name_on_tag ON tag(name);
+
+DROP TABLE IF EXISTS post_tag;
+CREATE TABLE post_tag (
+  id SERIAL PRIMARY KEY,
+  post_id INTEGER NOT NULL,
+  tag_id INTEGER NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS uk_post_tag_on_post_tag ON post_tag(post_id, tag_id);
+CREATE INDEX IF NOT EXISTS idx_tag_id_on_post_tag ON post_tag(tag_id);

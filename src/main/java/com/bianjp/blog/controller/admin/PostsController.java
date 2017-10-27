@@ -2,9 +2,11 @@ package com.bianjp.blog.controller.admin;
 
 import com.bianjp.blog.dto.JSONReplyDTO;
 import com.bianjp.blog.entity.Post;
+import com.bianjp.blog.exception.InvalidTagException;
 import com.bianjp.blog.form.PostForm;
 import com.bianjp.blog.helper.PaginationHelper;
 import com.bianjp.blog.service.PostService;
+import com.bianjp.blog.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,6 +17,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -23,10 +26,21 @@ import java.util.List;
 public class PostsController {
 
   private final PostService postService;
+  private final TagService tagService;
 
   @Autowired
-  public PostsController(PostService postService) {
+  public PostsController(PostService postService, TagService tagService) {
     this.postService = postService;
+    this.tagService = tagService;
+  }
+
+  /**
+   * Handle invalid tag exception when saving tags
+   */
+  @ExceptionHandler(InvalidTagException.class)
+  @ResponseBody
+  public JSONReplyDTO handleInvalidTagException(InvalidTagException exception) {
+    return JSONReplyDTO.fail(exception.getMessage());
   }
 
   // Page: Posts list, or drafts list
@@ -72,6 +86,7 @@ public class PostsController {
   @GetMapping("/new")
   public String newPage(Model model) {
     model.addAttribute("post", new Post());
+    model.addAttribute("tags", tagService.findAll(new Sort("name")));
     return "admin/posts/new";
   }
 
@@ -79,6 +94,7 @@ public class PostsController {
   @GetMapping("/{id}/edit")
   public String edit(Model model, @PathVariable("id") Post post) {
     model.addAttribute("post", post);
+    model.addAttribute("tags", tagService.findAll(new Sort("name")));
     return "admin/posts/edit";
   }
 
@@ -99,6 +115,7 @@ public class PostsController {
   // API: Update post
   @PutMapping("/{id}")
   @ResponseBody
+  @Transactional
   public JSONReplyDTO update(
       @PathVariable("id") Post post, @Valid @RequestBody PostForm postForm, Errors errors) {
     if (errors.hasFieldErrors()) {

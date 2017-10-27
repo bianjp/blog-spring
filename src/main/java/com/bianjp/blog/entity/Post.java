@@ -6,12 +6,12 @@ import com.bianjp.blog.entity_helper.PostStatusConverter;
 import com.bianjp.blog.helper.Markdown2HTML;
 import org.joda.time.LocalDate;
 
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Post extends BaseEntity {
@@ -36,6 +36,18 @@ public class Post extends BaseEntity {
 
   @Convert(converter = PostStatusConverter.class)
   private Status status = Status.DRAFT;
+
+  /**
+   * Use Set instead of List to avoid efficiency issues (delete all and recreate when updating)
+   * https://stackoverflow.com/a/46887535/3128576
+   */
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+  @JoinTable(
+    name = "post_tag",
+    joinColumns = @JoinColumn(name = "post_id"),
+    inverseJoinColumns = @JoinColumn(name = "tag_id")
+  )
+  private Set<Tag> tags = new HashSet<>();
 
   public String getTitle() {
     return title;
@@ -93,6 +105,26 @@ public class Post extends BaseEntity {
 
   public void setStatus(Status status) {
     this.status = status;
+  }
+
+  public Set<Tag> getTags() {
+    return tags;
+  }
+
+  public void setTags(Set<Tag> tags) {
+    this.tags = tags;
+  }
+
+  public void addTag(Tag tag) {
+    tags.add(tag);
+    tag.increasePostCount();
+    tag.getPosts().add(this);
+  }
+
+  public void removeTag(Tag tag) {
+    tags.remove(tag);
+    tag.decreasePostCount();
+    tag.getPosts().remove(this);
   }
 
   @Transient

@@ -1,6 +1,7 @@
+<#-- @ftlvariable name="tags" type="java.util.Set<com.bianjp.blog.entity.Tag>" -->
 <#-- @ftlvariable name="post" type="com.bianjp.blog.entity.Post" -->
 <form action="/admin/posts${post.newRecord?then("", "/${post.id}")}"
-      class="ui form ajax-submit">
+      class="ui form ajax-submit post">
   <input type="hidden" id="_method" value="${post.newRecord?then("POST", "PUT")}">
   <div class="field">
     <label for="title">Title</label>
@@ -13,6 +14,20 @@
   <div class="field">
     <label for="content">Content</label>
     <textarea name="content" id="content" rows="20" required>${post.content!''}</textarea>
+  </div>
+
+  <div class="inline field">
+    <label for="tags">Tags</label>
+    <div class="ui fluid multiple search selection dropdown" id="tags-input">
+      <input type="hidden" name="tagsText" value="<#list post.tags as tag>${tag.name}<#sep>,</#list>">
+      <i class="dropdown icon"></i>
+      <div class="default text">Comma separated tags</div>
+      <div class="menu">
+      <#list tags as tag>
+        <div class="item" data-value="${tag.name}">${tag.name}</div>
+      </#list>
+      </div>
+    </div>
   </div>
 
   <div class="inline fields">
