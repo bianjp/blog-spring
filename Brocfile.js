@@ -1,4 +1,5 @@
 const BroccoliSass = require('broccoli-sass-source-maps');
+const sassGlobImporter = require('node-sass-glob');
 const autoprefixer = require('broccoli-autoprefixer');
 const mergeTrees = require('broccoli-merge-trees');
 const AssetRev = require('broccoli-asset-rev');
@@ -36,6 +37,7 @@ const javascriptFiles = {
 const sassOptions = {
   outputStyle: isProduction ? 'compressed' : 'expanded',
   sourceComments: !isProduction,
+  importer: sassGlobImporter,
 };
 
 const autoprefixerOptions = {
