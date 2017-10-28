@@ -9,17 +9,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer> {
-  List<Post> findAllByStatus(Post.Status status, Pageable pageable);
+  Page<Post> findAllByStatus(Post.Status status, Pageable pageable);
 
-  int countAllByStatus(Post.Status status);
-
-  List<Post> findAllByStatusIn(Collection<Post.Status> statuses, Pageable pageable);
-
-  int countAllByStatusIn(Collection<Post.Status> statuses);
+  Page<Post> findAllByStatusIn(Collection<Post.Status> statuses, Pageable pageable);
 
   Post findByPublishDateAndSlugAndStatus(LocalDate publishDate, String slug, Post.Status status);
 

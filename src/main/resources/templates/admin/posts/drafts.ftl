@@ -1,6 +1,4 @@
-<#-- @ftlvariable name="posts" type="java.util.List<com.bianjp.blog.entity.Post>" -->
-<#-- @ftlvariable name="totalPages" type="java.lang.Integer" -->
-<#-- @ftlvariable name="currentPage" type="java.lang.Integer" -->
+<#-- @ftlvariable name="postPage" type="org.springframework.data.domain.Page<com.bianjp.blog.entity.Post>" -->
 <#-- @ftlvariable name="pageLink" type="java.lang.String" -->
 <#import "../../helper/pagination.ftl" as helper>
 <@adminLayout.layout pageTitle="Posts">
@@ -17,7 +15,7 @@
   </thead>
 
   <tbody data-delete-api="/admin/posts/{id}">
-    <#list posts as post>
+    <#list postPage.content as post>
     <tr data-id="${post.id}">
       <td><a href="/admin/posts/${post.id}/edit">${post.title}</a></td>
       <td>${post.createdAt.toString("yyyy/MM/dd HH:mm")}</td>
@@ -32,7 +30,9 @@
   <tfoot>
   <tr>
     <th class="pagination-container" colspan="4">
-      <@helper.pagination currentPage=currentPage totalPages=totalPages pageLink=pageLink></@helper.pagination>
+      <@helper.pagination currentPage=postPage.number + 1
+                          totalPages=postPage.totalPages
+                          pageLink=pageLink/>
     </th>
   </tr>
   </tfoot>

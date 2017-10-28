@@ -8,7 +8,9 @@ import com.bianjp.blog.helper.PaginationHelper;
 import com.bianjp.blog.service.PostService;
 import com.bianjp.blog.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin/posts")
@@ -34,9 +35,7 @@ public class PostsController {
     this.tagService = tagService;
   }
 
-  /**
-   * Handle invalid tag exception when saving tags
-   */
+  /** Handle invalid tag exception when saving tags */
   @ExceptionHandler(InvalidTagException.class)
   @ResponseBody
   public JSONReplyDTO handleInvalidTagException(InvalidTagException exception) {
@@ -45,20 +44,14 @@ public class PostsController {
 
   // Page: Posts list, or drafts list
   @GetMapping("")
-  public String index(
-      HttpServletRequest request,
-      Model model,
-      @RequestParam(name = "page", required = false, defaultValue = "1") int page,
-      @RequestParam(name = "pageSize", required = false, defaultValue = "20") int pageSize) {
-    Sort sort = new Sort(Sort.Direction.DESC, "id");
-    PageRequest pageRequest = new PageRequest(page - 1, pageSize, sort);
+  public String index(HttpServletRequest request, Model model, Pageable pageable) {
+    pageable =
+        new PageRequest(
+            pageable.getPageNumber(), pageable.getPageSize(), new Sort(Sort.Direction.DESC, "id"));
 
-    List<Post> posts = postService.findNormalPosts(pageRequest);
-    int totalCount = postService.countNormalPosts();
+    Page<Post> postPage = postService.findNormalPosts(pageable);
 
-    model.addAttribute("posts", posts);
-    model.addAttribute("currentPage", page);
-    model.addAttribute("totalPages", Math.ceil(totalCount * 1.0 / pageSize));
+    model.addAttribute("postPage", postPage);
     PaginationHelper.setPageLink(model, request);
     return "admin/posts/index";
   }
@@ -67,17 +60,15 @@ public class PostsController {
   public String drafts(
       HttpServletRequest request,
       Model model,
-      @RequestParam(name = "page", required = false, defaultValue = "1") int page,
-      @RequestParam(name = "pageSize", required = false, defaultValue = "20") int pageSize) {
-    Sort sort = new Sort(Sort.Direction.DESC, "id");
-    PageRequest pageRequest = new PageRequest(page - 1, pageSize, sort);
+      Pageable pageable
+  ) {
+    pageable =
+      new PageRequest(
+        pageable.getPageNumber(), pageable.getPageSize(), new Sort(Sort.Direction.DESC, "id"));
 
-    List<Post> posts = postService.findDrafts(pageRequest);
-    int totalCount = postService.countDrafts();
+    Page<Post> postPage = postService.findDrafts(pageable);
 
-    model.addAttribute("posts", posts);
-    model.addAttribute("currentPage", page);
-    model.addAttribute("totalPages", Math.ceil(totalCount * 1.0 / pageSize));
+    model.addAttribute("postPage", postPage);
     PaginationHelper.setPageLink(model, request);
     return "admin/posts/drafts";
   }

@@ -1,3 +1,8 @@
+.post-list > .pagination-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
 .post-meta-items {
   color: rgba(0, 0, 0, 0.6);
 
@@ -25,8 +30,4 @@
   pre {
     overflow: auto;
   }
-}
-
-.post + .pagination-container {
-  text-align: center;
 }

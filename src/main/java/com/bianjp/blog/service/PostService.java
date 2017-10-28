@@ -12,7 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,20 +32,12 @@ public class PostService {
     this.tagService = tagService;
   }
 
-  public List<Post> findDrafts(Pageable pageable) {
+  public Page<Post> findDrafts(Pageable pageable) {
     return postRepository.findAllByStatus(Post.Status.DRAFT, pageable);
   }
 
-  public int countDrafts() {
-    return postRepository.countAllByStatus(Post.Status.DRAFT);
-  }
-
-  public List<Post> findNormalPosts(Pageable pageable) {
+  public Page<Post> findNormalPosts(Pageable pageable) {
     return postRepository.findAllByStatusIn(normalStatuses, pageable);
-  }
-
-  public int countNormalPosts() {
-    return postRepository.countAllByStatusIn(normalStatuses);
   }
 
   public Post findPublishedPost(LocalDate publishDate, String slug) {
@@ -54,10 +49,13 @@ public class PostService {
     return postRepository.findByIdAndStatus(id, Post.Status.PUBLISHED);
   }
 
-  public List<Post> findLatestPublishedPosts(int count) {
-    Sort sort = new Sort(Sort.Direction.DESC, "id");
-    PageRequest pageRequest = new PageRequest(0, count, sort);
-    return postRepository.findAllByStatus(Post.Status.PUBLISHED, pageRequest);
+  public Page<Post> findPublishedPosts(Pageable pageable) {
+    pageable =
+        new PageRequest(
+            pageable.getPageNumber(),
+            pageable.getPageSize(),
+            new Sort(Sort.Direction.DESC, "publishDate"));
+    return postRepository.findAllByStatus(Post.Status.PUBLISHED, pageable);
   }
 
   public Page<Post> findPublishedPostsByTag(Tag tag, Pageable pageable) {

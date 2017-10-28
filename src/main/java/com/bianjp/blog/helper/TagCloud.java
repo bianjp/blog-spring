@@ -24,6 +24,7 @@ public class TagCloud {
 
   private void construct() {
     if (tags == null || tags.isEmpty()) {
+      items = new ArrayList<>();
       return;
     }
 

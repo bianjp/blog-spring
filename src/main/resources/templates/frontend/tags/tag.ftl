@@ -11,10 +11,10 @@
     <main class="post-list">
       <h1 class="ui title">Tag: <span class="">${tag.name}</span></h1>
       <@components.postList page.content/>
-    </main>
 
-    <div class="pagination-container">
-      <@pagination.pagination page.number + 1, page.totalPages, "/tags/${tagName?url}?page={page}"/>
-    </div>
+      <div class="pagination-container">
+        <@pagination.pagination page.number + 1, page.totalPages, "/tags/${tagName?url}?page={page}"/>
+      </div>
+    </main>
   </#if>
 </@layout.layout>
