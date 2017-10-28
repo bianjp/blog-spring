@@ -1,0 +1,36 @@
+.page-width {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 10px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.page-main {
+  padding-top: 65px;
+  padding-bottom: 20px;
+}
+
+.page-main.with-sidebar {
+  display: flex;
+
+  .post-list {
+    flex: 1 4 auto;
+    width: 70%;
+  }
+
+  .page-sidebar {
+    flex: 0 1 auto;
+    width: 300px;
+    min-width: 220px;
+    margin: 0 0 0 1rem;
+    padding: 20px;
+    background-color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .page-sidebar {
+      display: none;
+    }
+  }
+}

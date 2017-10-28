@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login - ${blog.title}</title>
   <link rel="icon" href="/favicon.png">
-  ${stylesheet('semantic-ui')}
+  <@assetHelper.stylesheets 'semantic-ui'/>
   <link rel="stylesheet" href="${assetPath('login.css')}">
 </head>
 <body>
@@ -46,8 +46,8 @@
     </div>
   </div>
 
-  ${javascript('jquery')}
-  ${javascript('semantic-ui')}
+  <@assetHelper.javascripts 'jquery'/>
+  <@assetHelper.javascripts 'semantic-ui'/>
   <script>
     $('.ui.checkbox').checkbox();
   </script>

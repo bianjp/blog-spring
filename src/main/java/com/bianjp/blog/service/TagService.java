@@ -22,17 +22,23 @@ public class TagService {
     return tagRepository.findAll(sort);
   }
 
+  /** Find all tags that has related posts */
+  public List<Tag> findAllWithPosts() {
+    return tagRepository.findAllByPostCountGreaterThan(0);
+  }
+
   public Tag findOrCreateByName(String name) {
     Tag tag = tagRepository.findByName(name);
     if (tag == null) {
-      try{
+      try {
         tag = new Tag();
         tag.setName(name);
         tag.setPostCount(0);
         tagRepository.save(tag);
       } catch (ConstraintViolationException exception) {
         ConstraintViolation<?> violation = exception.getConstraintViolations().iterator().next();
-        throw new InvalidTagException("Invalid tag " + violation.getPropertyPath() + ": " + violation.getMessage());
+        throw new InvalidTagException(
+            "Invalid tag " + violation.getPropertyPath() + ": " + violation.getMessage());
       }
     }
     return tag;

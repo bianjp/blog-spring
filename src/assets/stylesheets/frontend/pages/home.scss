@@ -1,0 +1,12 @@
+.tag-cloud {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  a {
+    margin: 0 5px;
+    flex: 0 0 auto;
+    line-height: 1.1;
+  }
+}

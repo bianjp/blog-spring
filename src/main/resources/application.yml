@@ -53,6 +53,10 @@ spring:
         admin/layout/layout.ftl as adminLayout,
         helper/asset-helper.ftl as assetHelper
 
+  devtools:
+    restart:
+      exclude: freemarker_implicit.ftl
+
   http:
     multipart:
       enabled: true

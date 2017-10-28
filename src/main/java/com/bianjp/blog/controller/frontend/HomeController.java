@@ -2,7 +2,10 @@ package com.bianjp.blog.controller.frontend;
 
 import com.bianjp.blog.controller_helper.NotFoundException;
 import com.bianjp.blog.entity.Post;
+import com.bianjp.blog.entity.Tag;
+import com.bianjp.blog.helper.TagCloud;
 import com.bianjp.blog.service.PostService;
+import com.bianjp.blog.service.TagService;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,17 +18,23 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-  private PostService postService;
+  private final PostService postService;
+  private final TagService tagService;
 
   @Autowired
-  public HomeController(PostService postService) {
+  public HomeController(PostService postService, TagService tagService) {
     this.postService = postService;
+    this.tagService = tagService;
   }
 
   @GetMapping("")
   public String home(Model model) {
     List<Post> posts = postService.findLatestPublishedPosts(10);
     model.addAttribute("posts", posts);
+
+    List<Tag> tags = tagService.findAllWithPosts();
+    model.addAttribute("tagCloud", new TagCloud(tags));
+
     return "frontend/home";
   }
 
