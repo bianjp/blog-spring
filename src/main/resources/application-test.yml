@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost/blog_test'
+
+assets:
+  cdn:
+    enabled: false
+
+  broccoli:
+    enabled: true
+
+blog:
+  disqus:
+    enabled: false
