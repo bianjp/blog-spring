@@ -11,6 +11,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,9 @@ public class AssetPathHelper implements TemplateMethodModelEx {
       throw new RuntimeException("Missing assets manifest file!");
     }
     ObjectMapper mapper = new ObjectMapper();
-    manifest = mapper.readValue(manifestResource.getInputStream(), Manifest.class);
+    try (InputStream inputStream = manifestResource.getInputStream()) {
+      manifest = mapper.readValue(inputStream, Manifest.class);
+    }
   }
 
   @Override

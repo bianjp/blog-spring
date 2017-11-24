@@ -3,10 +3,9 @@ package com.bianjp.blog.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextClosedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -28,6 +27,7 @@ public class BroccoliServer {
     this.broccoliConfig = assetConfig.getBroccoli();
   }
 
+  @EventListener(ApplicationReadyEvent.class)
   private void start() {
     ProcessBuilder processBuilder =
         new ProcessBuilder(
@@ -47,6 +47,7 @@ public class BroccoliServer {
     }
   }
 
+  @EventListener(ContextClosedEvent.class)
   private void stop() {
     if (process != null && process.isAlive()) {
       process.destroy();
@@ -56,16 +57,6 @@ public class BroccoliServer {
   private void restart() {
     stop();
     start();
-  }
-
-  @Bean
-  public ApplicationListener<ApplicationReadyEvent> applicationReadyEventApplicationListener() {
-    return event -> start();
-  }
-
-  @Bean
-  public ApplicationListener<ContextClosedEvent> contextClosedEventApplicationListener() {
-    return event -> stop();
   }
 
   // If Brocfile.js changed, restart broccoli to take effect

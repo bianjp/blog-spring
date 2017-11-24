@@ -1,7 +1,7 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '1.5.7.RELEASE'
-    id 'com.github.ben-manes.versions' version '0.15.0'
+    id 'org.springframework.boot' version '1.5.8.RELEASE'
+    id 'com.github.ben-manes.versions' version '0.17.0'
 }
 
 version = '0.1.0-SNAPSHOT'
@@ -44,7 +44,7 @@ dependencies {
     compile('joda-time:joda-time:2.9.9')
 
     // Markdown parser
-    compile('com.vladsch.flexmark:flexmark-all:0.27.0')
+    compile('com.vladsch.flexmark:flexmark-all:0.28.8')
 
 }
 
