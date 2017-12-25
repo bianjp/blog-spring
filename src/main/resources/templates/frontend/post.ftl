@@ -9,5 +9,10 @@
     <div class="post-content">${post.contentHtml?no_esc}</div>
   </article>
 
+  <section>
+    <h3 class="ui header">Share this post</h3>
+    <div id="social-share"></div>
+  </section>
+
   <#include "included/disqus.ftl">
 </@layout.layout>

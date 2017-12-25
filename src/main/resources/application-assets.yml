@@ -38,6 +38,10 @@ assets:
       - highlight.js/9.12.0/languages/sql.min.js
       - highlight.js/9.12.0/languages/typescript.min.js
       - highlight.js/9.12.0/languages/yaml.min.js
+    jssocials:
+      - jsSocials/1.5.0/jssocials.min.css
+      - jsSocials/1.5.0/jssocials-theme-flat.min.css
+      - jsSocials/1.5.0/jssocials.min.js
 
   npm-path:
     jquery:
@@ -72,3 +76,7 @@ assets:
       - highlight.js-cdn/build/languages/sql.min.js
       - highlight.js-cdn/build/languages/typescript.min.js
       - highlight.js-cdn/build/languages/yaml.min.js
+    jssocials:
+      - jssocials/dist/jssocials.css
+      - jssocials/dist/jssocials-theme-flat.css
+      - jssocials/dist/jssocials.min.js

@@ -9,6 +9,7 @@
   <link rel="icon" href="${assetPath('favicon.png')}">
   <@assetHelper.stylesheets 'semantic-ui'/>
   <@assetHelper.stylesheets 'highlight-js'/>
+  <@assetHelper.stylesheets 'jssocials'/>
   <link rel="stylesheet" href="${assetPath('application.css')}">
 </head>
 <body class="${bodyClass}">
@@ -41,6 +42,7 @@
 <@assetHelper.javascripts 'jquery'/>
 <@assetHelper.javascripts 'semantic-ui'/>
 <@assetHelper.javascripts 'highlight-js'/>
+<@assetHelper.javascripts 'jssocials'/>
 <script src="${assetPath('application.js')}"></script>
 </body>
 </html>
