@@ -55,7 +55,7 @@ spring:
 
   devtools:
     restart:
-      exclude: freemarker_implicit.ftl
+      additional-exclude: freemarker_implicit.ftl
 
   http:
     multipart:
