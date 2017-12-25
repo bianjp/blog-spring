@@ -8,7 +8,8 @@ $(function () {
 
   $("#social-share").jsSocials({
     shares: ["twitter", "facebook", "googleplus", "linkedin", "pinterest"],
-    url: window.location.host + window.location.pathname, // Do not include query string and hash
+    // Do not include query string and hash
+    url: window.location.protocol + '//' + window.location.host + window.location.pathname,
     text: document.title,
     showLabel: false,
     showCount: false,
