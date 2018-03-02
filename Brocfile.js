@@ -1,6 +1,6 @@
 const BroccoliSass = require('broccoli-sass-source-maps');
 const sassGlobImporter = require('node-sass-glob');
-const autoprefixer = require('broccoli-autoprefixer');
+const Autoprefixer = require('broccoli-autoprefixer');
 const mergeTrees = require('broccoli-merge-trees');
 const AssetRev = require('broccoli-asset-rev');
 const uglify = require('broccoli-uglify-sourcemap');
@@ -48,7 +48,7 @@ const autoprefixerOptions = {
 
 stylesheetTrees = stylesheetsFiles.map(function (filename) {
   var tree = new BroccoliSass([stylesheetsDir], filename + '.scss', filename + '.css', sassOptions);
-  return autoprefixer(tree, autoprefixerOptions);
+  return new Autoprefixer(tree, autoprefixerOptions);
 });
 
 for (var outputFile in javascriptFiles) {
