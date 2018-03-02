@@ -1,9 +1,11 @@
 server:
   # https://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/reference/htmlsingle/#howto-use-tomcat-behind-a-proxy-server
   use-forward-headers: true
-  session:
-    persistent: true
-    timeout: 7200
+  servlet:
+    session:
+      persistent: true
+      # https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence-
+      timeout: PT2H
 
 spring:
   application:
@@ -16,6 +18,7 @@ spring:
   jpa:
     database: postgresql
     show-sql: true
+    open-in-view: true
 
     hibernate:
       naming:
@@ -57,7 +60,7 @@ spring:
     restart:
       additional-exclude: freemarker_implicit.ftl
 
-  http:
+  servlet:
     multipart:
       enabled: true
       max-file-size: 100MB
@@ -69,11 +72,6 @@ logging:
     org.springframework.web: info
     org.springframework.security: info
     org.hibernate: info
-
-management:
-  security:
-    enabled: true
-    roles: ADMIN
 
 assets:
   cdn:

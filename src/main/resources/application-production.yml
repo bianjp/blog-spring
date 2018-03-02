@@ -1,6 +1,7 @@
 spring:
   resources:
-    cache-period: 7200
+    cache:
+      period: PT2H
     chain:
       cache: true
       strategy:

@@ -1,11 +1,11 @@
 package com.bianjp.blog.config;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -25,8 +25,7 @@ public class BlogProperties {
   @NotEmpty private String title;
 
   /** Disqus configuration */
-  @Valid
-  private final Disqus disqus = new Disqus();
+  @Valid private final Disqus disqus = new Disqus();
 
   public String getHost() {
     return host;

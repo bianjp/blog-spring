@@ -1,6 +1,7 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '1.5.9.RELEASE'
+    id 'org.springframework.boot' version '2.0.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.4.RELEASE'
     id 'com.github.ben-manes.versions' version '0.17.0'
 }
 
@@ -25,9 +26,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-data-redis')
     compile('org.springframework.boot:spring-boot-starter-freemarker')
-    compile('org.springframework.boot:spring-boot-starter-mobile')
     compile('org.springframework.boot:spring-boot-starter-security')
-    compile('org.springframework.session:spring-session')
+    compile('org.springframework.session:spring-session-data-redis')
     compile('org.springframework.boot:spring-boot-starter-validation')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-log4j2')
@@ -37,14 +37,14 @@ dependencies {
     // Automatically generate configuration meta-data file from items annotated with @ConfigurationProperties
     compileOnly('org.springframework.boot:spring-boot-configuration-processor')
 
-    compile('org.postgresql:postgresql:42.1.4')
+    compile('org.postgresql:postgresql:42.2.1')
 
-    compile "org.flywaydb:flyway-core:5.0.3"
+    compile "org.flywaydb:flyway-core:5.0.7"
 
     compile('joda-time:joda-time:2.9.9')
 
     // Markdown parser
-    compile('com.vladsch.flexmark:flexmark-all:0.28.24')
+    compile('com.vladsch.flexmark:flexmark-all:0.32.4')
 
 }
 
@@ -62,5 +62,5 @@ task assetCompile(type: Exec, group: 'assets') {
 // Without this directive any additional-spring-configuration-metadata.json files will not be processed
 compileJava.dependsOn(processResources)
 
-jar.dependsOn assetCompile
-jar.from 'build/assets', { into 'assets' }
+bootJar.dependsOn assetCompile
+bootJar.from 'build/assets', { into 'assets' }
