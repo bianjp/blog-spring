@@ -7,7 +7,7 @@ assets:
 
   cdn-path:
     jquery:
-      - jquery/3.2.1/jquery.min.js
+      - jquery/3.3.1/jquery.min.js
     semantic-ui:
       - semantic-ui/2.2.13/semantic.min.css
       - semantic-ui/2.2.13/semantic.min.js

@@ -8,7 +8,7 @@
     "highlight.js-cdn": "bianjp/highlight.js-cdn-release",
     "jquery": "^3.2.1",
     "jssocials": "^1.5.0",
-    "semantic-ui-css": "^2.2.12"
+    "semantic-ui-css": "2.2.12"
   },
   "devDependencies": {
     "broccoli": "^1.1.3",
