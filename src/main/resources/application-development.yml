@@ -1,3 +1,7 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost/blog_development'
+
 management:
   endpoint:
     health:

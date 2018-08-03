@@ -33,7 +33,7 @@ public class TagController {
 
     if (tag != null) {
       pageable =
-          new PageRequest(
+          PageRequest.of(
               pageable.getPageNumber(),
               pageable.getPageSize(),
               new Sort(Sort.Direction.DESC, "publishDate"));

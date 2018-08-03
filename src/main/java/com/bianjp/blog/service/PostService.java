@@ -4,6 +4,11 @@ import com.bianjp.blog.entity.Post;
 import com.bianjp.blog.entity.Tag;
 import com.bianjp.blog.form.PostForm;
 import com.bianjp.blog.repository.PostRepository;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,12 +16,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -51,7 +50,7 @@ public class PostService {
 
   public Page<Post> findPublishedPosts(Pageable pageable) {
     pageable =
-        new PageRequest(
+        PageRequest.of(
             pageable.getPageNumber(),
             pageable.getPageSize(),
             new Sort(Sort.Direction.DESC, "publishDate"));

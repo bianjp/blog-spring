@@ -1,14 +1,15 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.0.0.RELEASE'
+    id 'org.springframework.boot' version '2.0.4.RELEASE'
     id 'io.spring.dependency-management' version '1.0.4.RELEASE'
-    id 'com.github.ben-manes.versions' version '0.17.0'
+    id 'com.github.ben-manes.versions' version '0.20.0'
 }
 
 version = '0.1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -37,11 +38,11 @@ dependencies {
     // Automatically generate configuration meta-data file from items annotated with @ConfigurationProperties
     compileOnly('org.springframework.boot:spring-boot-configuration-processor')
 
-    compile('org.postgresql:postgresql:42.2.1')
+    compile('org.postgresql:postgresql:42.2.4')
 
-    compile "org.flywaydb:flyway-core:5.0.7"
+    compile "org.flywaydb:flyway-core:5.1.4"
 
-    compile('joda-time:joda-time:2.9.9')
+    compile('joda-time:joda-time:2.10')
 
     // Markdown parser
     compile('com.vladsch.flexmark:flexmark-all:0.32.4')

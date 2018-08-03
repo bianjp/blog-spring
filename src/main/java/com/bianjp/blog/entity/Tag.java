@@ -1,13 +1,12 @@
 package com.bianjp.blog.entity;
 
 import com.bianjp.blog.entity_helper.BaseEntity;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Tag extends BaseEntity {
@@ -54,13 +53,20 @@ public class Tag extends BaseEntity {
 
   @Override
   public String toString() {
-    return "Tag{" +
-      "name='" + name + '\'' +
-      ", postCount=" + postCount +
-      ", posts=" + posts +
-      ", id=" + id +
-      ", updatedAt=" + updatedAt +
-      ", createdAt=" + createdAt +
-      '}';
+    return "Tag{"
+        + "name='"
+        + name
+        + '\''
+        + ", postCount="
+        + postCount
+        + ", posts="
+        + posts
+        + ", id="
+        + id
+        + ", updatedAt="
+        + updatedAt
+        + ", createdAt="
+        + createdAt
+        + '}';
   }
 }
