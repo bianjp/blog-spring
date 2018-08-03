@@ -1,4 +1,4 @@
-const BroccoliSass = require('broccoli-sass-source-maps');
+const BroccoliSass = require('broccoli-sass-source-maps')(require('sass'));
 const sassGlobImporter = require('node-sass-glob');
 const Autoprefixer = require('broccoli-autoprefixer');
 const mergeTrees = require('broccoli-merge-trees');
