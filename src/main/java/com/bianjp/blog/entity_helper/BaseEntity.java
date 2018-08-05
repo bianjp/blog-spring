@@ -1,5 +1,7 @@
 package com.bianjp.blog.entity_helper;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -11,6 +13,8 @@ import java.util.Objects;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Getter
+@Setter
 public class BaseEntity implements Serializable {
   private static final long serialVersionUID = 100L;
 
@@ -25,30 +29,6 @@ public class BaseEntity implements Serializable {
   @Convert(converter = DateTimeConverter.class)
   @CreatedDate
   protected DateTime createdAt;
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  public DateTime getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(DateTime createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public DateTime getUpdatedAt() {
-    return updatedAt;
-  }
-
-  public void setUpdatedAt(DateTime updatedAt) {
-    this.updatedAt = updatedAt;
-  }
 
   @Transient
   public boolean isNewRecord() {

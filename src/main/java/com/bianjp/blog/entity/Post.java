@@ -3,18 +3,33 @@ package com.bianjp.blog.entity;
 import com.bianjp.blog.entity_helper.BaseEntity;
 import com.bianjp.blog.entity_helper.LocalDateConverter;
 import com.bianjp.blog.entity_helper.PostStatusConverter;
-import com.bianjp.blog.helper.Markdown2HTML;
-import org.joda.time.LocalDate;
-
-import javax.persistence.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.asciidoctor.Asciidoctor;
+import org.asciidoctor.ast.Document;
+import org.joda.time.LocalDate;
 
 @Entity
+@Getter
+@Setter
+@ToString
 public class Post extends BaseEntity {
+  private static final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
+
   @NotNull
   @Size(min = 1, max = 100)
   private String title;
@@ -43,76 +58,16 @@ public class Post extends BaseEntity {
    */
   @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   @JoinTable(
-    name = "post_tag",
-    joinColumns = @JoinColumn(name = "post_id"),
-    inverseJoinColumns = @JoinColumn(name = "tag_id")
-  )
+      name = "post_tag",
+      joinColumns = @JoinColumn(name = "post_id"),
+      inverseJoinColumns = @JoinColumn(name = "tag_id"))
   private Set<Tag> tags = new HashSet<>();
-
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public LocalDate getPublishDate() {
-    return publishDate;
-  }
-
-  public void setPublishDate(LocalDate publishDate) {
-    this.publishDate = publishDate;
-  }
-
-  public String getSlug() {
-    return slug;
-  }
-
-  public void setSlug(String slug) {
-    this.slug = slug;
-  }
-
-  public String getContent() {
-    return content;
-  }
 
   public void setContent(String content) {
     this.content = content;
-    this.contentHtml = Markdown2HTML.render(content);
-    this.excerpt = Markdown2HTML.renderExcerpt(content);
-  }
-
-  public String getContentHtml() {
-    return contentHtml;
-  }
-
-  public void setContentHtml(String contentHtml) {
-    this.contentHtml = contentHtml;
-  }
-
-  public String getExcerpt() {
-    return excerpt;
-  }
-
-  public void setExcerpt(String excerpt) {
-    this.excerpt = excerpt;
-  }
-
-  public Status getStatus() {
-    return status;
-  }
-
-  public void setStatus(Status status) {
-    this.status = status;
-  }
-
-  public Set<Tag> getTags() {
-    return tags;
-  }
-
-  public void setTags(Set<Tag> tags) {
-    this.tags = tags;
+    Document document = asciidoctor.load(content, Collections.emptyMap());
+    this.contentHtml = document.convert();
+    this.excerpt = document.getBlocks().get(0).convert();
   }
 
   public void addTag(Tag tag) {
@@ -152,34 +107,7 @@ public class Post extends BaseEntity {
     return publishDate.toString("yyyy/MM/dd") + "/" + slug;
   }
 
-  @Override
-  public String toString() {
-    return "Post{"
-        + "title='"
-        + title
-        + '\''
-        + ", publishDate="
-        + publishDate
-        + ", slug='"
-        + slug
-        + '\''
-        + ", content='"
-        + content
-        + '\''
-        + ", contentHtml='"
-        + contentHtml
-        + '\''
-        + ", status="
-        + status
-        + ", id="
-        + id
-        + ", updatedAt="
-        + updatedAt
-        + ", createdAt="
-        + createdAt
-        + '}';
-  }
-
+  @Getter
   public enum Status {
     DELETED(-1, "deleted"),
     DRAFT(0, "draft"),
@@ -191,22 +119,6 @@ public class Post extends BaseEntity {
 
     Status(int code, String text) {
       this.code = code;
-      this.text = text;
-    }
-
-    public int getCode() {
-      return code;
-    }
-
-    public void setCode(int code) {
-      this.code = code;
-    }
-
-    public String getText() {
-      return text;
-    }
-
-    public void setText(String text) {
       this.text = text;
     }
 

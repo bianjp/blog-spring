@@ -7,8 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@Getter
+@Setter
+@ToString
 public class Tag extends BaseEntity {
   @NotEmpty
   @Pattern(regexp = "[^\\s]+", message = "Whitespace characters not allowed")
@@ -19,54 +25,11 @@ public class Tag extends BaseEntity {
   @ManyToMany(mappedBy = "tags")
   private Set<Post> posts = new HashSet<>();
 
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Integer getPostCount() {
-    return postCount;
-  }
-
-  public void setPostCount(Integer postCount) {
-    this.postCount = postCount;
-  }
-
-  public Set<Post> getPosts() {
-    return posts;
-  }
-
-  public void setPosts(Set<Post> posts) {
-    this.posts = posts;
-  }
-
   public void increasePostCount() {
     postCount++;
   }
 
   public void decreasePostCount() {
     postCount--;
-  }
-
-  @Override
-  public String toString() {
-    return "Tag{"
-        + "name='"
-        + name
-        + '\''
-        + ", postCount="
-        + postCount
-        + ", posts="
-        + posts
-        + ", id="
-        + id
-        + ", updatedAt="
-        + updatedAt
-        + ", createdAt="
-        + createdAt
-        + '}';
   }
 }

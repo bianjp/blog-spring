@@ -44,9 +44,9 @@ dependencies {
 
     compile('joda-time:joda-time:2.10')
 
-    // Markdown parser
-    compile('com.vladsch.flexmark:flexmark-all:0.32.4')
+    compile 'org.asciidoctor:asciidoctorj:1.5.7'
 
+    compileOnly 'org.projectlombok:lombok:1.18.2'
 }
 
 task assetClean(type: Delete, group: 'assets') {

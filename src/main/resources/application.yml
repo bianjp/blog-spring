@@ -28,6 +28,9 @@ spring:
   datasource:
     url: 'jdbc:postgresql://localhost/blog'
 
+  data:
+    redis.repositories.enabled: false
+
   session:
     # https://github.com/spring-projects/spring-session/blob/master/docs/src/docs/asciidoc/guides/boot-redis.adoc
     store-type: redis
