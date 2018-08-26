@@ -51,17 +51,21 @@ dependencies {
 
 task assetClean(type: Delete, group: 'assets') {
     description 'Clean built assets'
-    delete 'build/assets'
+    delete "${buildDir}/assets"
 }
 
 task assetCompile(type: Exec, group: 'assets') {
     description 'Compile assets'
     dependsOn assetClean
-    commandLine 'broccoli', 'build', 'build/assets'
+    mkdir buildDir
+    commandLine 'broccoli', 'build', "${buildDir}/assets"
 }
 
 // Without this directive any additional-spring-configuration-metadata.json files will not be processed
 compileJava.dependsOn(processResources)
 
-bootJar.dependsOn assetCompile
-bootJar.from 'build/assets', { into 'assets' }
+bootJar {
+    dependsOn assetCompile
+    from 'build/assets', { into 'assets' }
+    requiresUnpack '**/jruby-complete*.jar', '**/asciidoctorj-*.jar'
+}
