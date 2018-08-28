@@ -36,4 +36,9 @@
   pre {
     overflow: auto;
   }
+
+  // nested list
+  li > p + .ulist {
+    margin-top: -0.8em;
+  }
 }
