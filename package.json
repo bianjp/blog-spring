@@ -11,7 +11,7 @@
     "semantic-ui-css": "^2.2.12"
   },
   "devDependencies": {
-    "broccoli": "^1.1.3",
+    "broccoli": "^2.0.1",
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-autoprefixer": "^7.0.0",
     "broccoli-concat": "^3.2.2",
