@@ -66,8 +66,8 @@ By default `BroccoliServer` will start a `broccoli serve` process listening on l
 ### Production
 
 ```bash
-./gradlew build
-java -jar build/libs/blog-spring-0.1.0-SNAPSHOT.jar --spring.profiles.active=production
+./gradlew build -x test
+java -jar build/libs/blog-0.1.0-SNAPSHOT.jar --spring.profiles.active=production
 ```
 
 #### Systemd
