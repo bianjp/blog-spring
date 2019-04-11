@@ -1,11 +1,10 @@
-import io.spring.gradle.dependencymanagement.org.codehaus.plexus.util.FileUtils.mkdir
-import java.nio.file.Files.delete
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
   java
-  id("org.springframework.boot") version "2.1.2.RELEASE"
-  id("io.spring.dependency-management") version "1.0.6.RELEASE"
-  id("com.github.ben-manes.versions") version "0.20.0"
+  id("org.springframework.boot") version "2.1.4.RELEASE"
+  id("io.spring.dependency-management") version "1.0.7.RELEASE"
+  id("com.github.ben-manes.versions") version "0.21.0"
 }
 
 version = "0.1.0-SNAPSHOT"
@@ -48,10 +47,10 @@ dependencies {
   implementation("org.postgresql:postgresql:42.2.5")
   implementation("org.flywaydb:flyway-core:5.2.4")
   implementation("joda-time:joda-time:2.10.1")
-  implementation("org.asciidoctor:asciidoctorj:1.6.0")
+  implementation("org.asciidoctor:asciidoctorj:1.6.2")
 
-  annotationProcessor("org.projectlombok:lombok:1.18.4")
-  compileOnly("org.projectlombok:lombok:1.18.4")
+  annotationProcessor("org.projectlombok:lombok:1.18.6")
+  compileOnly("org.projectlombok:lombok:1.18.6")
 }
 
 
@@ -80,4 +79,20 @@ tasks.bootJar {
     into("assets")
   }
   requiresUnpack("**/jruby-complete*.jar", "**/asciidoctorj-*.jar")
+}
+
+
+tasks.named<DependencyUpdatesTask>("dependencyUpdates") {
+  resolutionStrategy {
+    componentSelection {
+      all {
+        val rejected = listOf("alpha", "beta", "rc", "cr", "m", "preview", "b", "ea")
+          .map { qualifier -> Regex("(?i).*[.-]$qualifier[.\\d-+]*") }
+          .any { it.matches(candidate.version) }
+        if (rejected) {
+          reject("Release candidate")
+        }
+      }
+    }
+  }
 }
