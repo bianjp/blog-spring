@@ -28,10 +28,10 @@ public class BroccoliServer {
   }
 
   @EventListener(ApplicationReadyEvent.class)
-  private void start() {
+  public void start() {
     ProcessBuilder processBuilder =
         new ProcessBuilder(
-            "broccoli",
+            System.getProperty("os.name").startsWith("Windows") ? "broccoli.cmd" : "broccoli",
             "serve",
             "--host",
             broccoliConfig.getHost(),
@@ -42,13 +42,12 @@ public class BroccoliServer {
     try {
       process = processBuilder.start();
     } catch (IOException e) {
-      e.printStackTrace();
       throw new RuntimeException(e);
     }
   }
 
   @EventListener(ContextClosedEvent.class)
-  private void stop() {
+  public void stop() {
     if (process != null && process.isAlive()) {
       process.destroy();
     }
