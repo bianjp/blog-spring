@@ -29,7 +29,13 @@ nbdist/
 /log
 /logs
 
+# npm, yarn
 /node_modules
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+.pnp.*
+
 /npm-debug.log
 /yarn-error.log
 
