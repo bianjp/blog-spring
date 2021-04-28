@@ -3,7 +3,6 @@ package com.bianjp.blog.entity;
 import com.bianjp.blog.entity_helper.BaseEntity;
 import com.bianjp.blog.entity_helper.LocalDateConverter;
 import com.bianjp.blog.entity_helper.PostStatusConverter;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -20,6 +19,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.asciidoctor.Asciidoctor;
+import org.asciidoctor.Options;
 import org.asciidoctor.ast.Document;
 import org.joda.time.LocalDate;
 
@@ -65,7 +65,7 @@ public class Post extends BaseEntity {
 
   public void setContent(String content) {
     this.content = content;
-    Document document = asciidoctor.load(content, Collections.emptyMap());
+    Document document = asciidoctor.load(content, Options.builder().build());
     this.contentHtml = document.convert();
     this.excerpt = document.getBlocks().get(0).convert();
   }
