@@ -19,8 +19,8 @@ repositories {
 }
 
 configurations {
-  compile.get().exclude(mapOf("module" to "spring-boot-starter-logging"))
-  compile.get().exclude(mapOf("module" to "spring-boot-starter-tomcat"))
+  implementation.get().exclude(mapOf("module" to "spring-boot-starter-logging"))
+  implementation.get().exclude(mapOf("module" to "spring-boot-starter-tomcat"))
 }
 
 dependencies {
@@ -39,7 +39,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-log4j2")
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
-  testCompile("org.springframework.boot:spring-boot-starter-test")
+  testImplementation("org.springframework.boot:spring-boot-starter-test")
 
   // Automatically generate configuration meta-data file from items annotated with @ConfigurationProperties
   compileOnly("org.springframework.boot:spring-boot-configuration-processor")
