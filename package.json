@@ -5,20 +5,23 @@
   "author": "Bian Jiaping <ssbianjp@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "highlight.js-cdn": "bianjp/highlight.js-cdn-release",
+    "@highlightjs/cdn-assets": "^10.6.0",
     "jquery": "^3.2.1",
     "jssocials": "^1.5.0",
     "semantic-ui-css": "^2.2.12"
   },
   "devDependencies": {
-    "broccoli": "^2.0.1",
+    "broccoli": "^3.0.1",
     "broccoli-asset-rev": "^3.0.0",
-    "broccoli-autoprefixer": "^7.0.0",
-    "broccoli-concat": "^3.2.2",
-    "broccoli-merge-trees": "^3.0.0",
+    "broccoli-autoprefixer": "^8.0.0",
+    "broccoli-concat": "^4.2.4",
+    "broccoli-merge-trees": "^4.2.0",
     "broccoli-sass-source-maps": "^4.0.0",
-    "broccoli-uglify-sourcemap": "^2.0.0",
+    "broccoli-uglify-sourcemap": "^4.0.0",
     "node-sass-glob": "^1.0.4",
     "sass": "^1.10.2"
-  }
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
 }

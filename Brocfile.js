@@ -3,7 +3,7 @@ const sassGlobImporter = require('node-sass-glob');
 const Autoprefixer = require('broccoli-autoprefixer');
 const mergeTrees = require('broccoli-merge-trees');
 const AssetRev = require('broccoli-asset-rev');
-const uglify = require('broccoli-uglify-sourcemap');
+const Uglify = require('broccoli-uglify-sourcemap');
 const concat = require('broccoli-concat');
 
 const isProduction = process.argv[2] === 'build';
@@ -41,9 +41,6 @@ const sassOptions = {
 };
 
 const autoprefixerOptions = {
-  browsers: [
-    'last 2 versions',
-  ]
 };
 
 stylesheetTrees = stylesheetsFiles.map(function (filename) {
@@ -61,7 +58,7 @@ for (var outputFile in javascriptFiles) {
 // Compress javascripts
 if (isProduction) {
   javascriptTrees = javascriptTrees.map(function (tree) {
-    return uglify(tree);
+    return new Uglify(tree);
   });
 }
 
