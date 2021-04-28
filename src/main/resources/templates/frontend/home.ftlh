@@ -1,7 +1,7 @@
 <#-- @ftlvariable name="postPage" type="org.springframework.data.domain.Page<com.bianjp.blog.entity.Post>" -->
 <#-- @ftlvariable name="pageLink" type="java.lang.String" -->
-<#import "components/post.ftl" as components>
-<#import "../helper/pagination.ftl" as pagination>
+<#import "components/post.ftlh" as components>
+<#import "../helper/pagination.ftlh" as pagination>
 
 <@layout.layout pageTitle='' showSidebar=true>
   <main class="post-list">

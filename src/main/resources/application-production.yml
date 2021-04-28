@@ -1,13 +1,15 @@
 spring:
-  resources:
-    cache:
-      period: PT2H
-    chain:
-      cache: true
-      strategy:
-        content:
-          enabled: true
+  web:
+    resources:
+      cache:
+        period: PT2H
+      chain:
+        cache: true
+        strategy:
+          content:
+            enabled: true
 
 logging:
   config: classpath:log4j2-production.xml
-  path: log
+  file:
+    path: log

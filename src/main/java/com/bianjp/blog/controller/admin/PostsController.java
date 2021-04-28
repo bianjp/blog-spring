@@ -54,7 +54,7 @@ public class PostsController {
   public String index(HttpServletRequest request, Model model, Pageable pageable) {
     pageable =
         PageRequest.of(
-            pageable.getPageNumber(), pageable.getPageSize(), new Sort(Sort.Direction.DESC, "id"));
+            pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "id"));
 
     Page<Post> postPage = postService.findNormalPosts(pageable);
 
@@ -67,7 +67,7 @@ public class PostsController {
   public String drafts(HttpServletRequest request, Model model, Pageable pageable) {
     pageable =
         PageRequest.of(
-            pageable.getPageNumber(), pageable.getPageSize(), new Sort(Sort.Direction.DESC, "id"));
+            pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "id"));
 
     Page<Post> postPage = postService.findDrafts(pageable);
 

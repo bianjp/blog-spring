@@ -1,6 +1,5 @@
 server:
-  # https://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/reference/htmlsingle/#howto-use-tomcat-behind-a-proxy-server
-  use-forward-headers: true
+  forward-headers-strategy: native
   servlet:
     session:
       persistent: true
@@ -39,15 +38,10 @@ spring:
 
   freemarker:
     cache: true
-    charset: UTF-8
-    check-template-location: true
-    content-type: text/html
-    expose-request-attributes: false
-    expose-session-attributes: false
     request-context-attribute: request
     allowSessionOverride: true
     settings:
-      incompatible_improvements: 2.3.26
+      incompatible_improvements: 2.3.31
       # Required for ?url built in string util
       # http://freemarker.org/docs/ref_builtins_string.html#ref_builtin_url
       output_encoding: UTF-8
@@ -55,13 +49,13 @@ spring:
       # http://freemarker.org/docs/dgui_misc_autoescaping.html
       output_format: HTMLOutputFormat
       auto_import: >
-        frontend/layout/layout.ftl as layout,
-        admin/layout/layout.ftl as adminLayout,
-        helper/asset-helper.ftl as assetHelper
+        frontend/layout/layout.ftlh as layout,
+        admin/layout/layout.ftlh as adminLayout,
+        helper/asset-helper.ftlh as assetHelper
 
   devtools:
     restart:
-      additional-exclude: freemarker_implicit.ftl
+      additional-exclude: freemarker_implicit.ftlh
 
   servlet:
     multipart:

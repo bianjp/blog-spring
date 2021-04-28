@@ -53,7 +53,7 @@ public class PostService {
         PageRequest.of(
             pageable.getPageNumber(),
             pageable.getPageSize(),
-            new Sort(Sort.Direction.DESC, "publishDate"));
+            Sort.by(Sort.Direction.DESC, "publishDate"));
     return postRepository.findAllByStatus(Post.Status.PUBLISHED, pageable);
   }
 

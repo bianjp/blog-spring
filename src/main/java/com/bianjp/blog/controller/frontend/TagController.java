@@ -36,7 +36,7 @@ public class TagController {
           PageRequest.of(
               pageable.getPageNumber(),
               pageable.getPageSize(),
-              new Sort(Sort.Direction.DESC, "publishDate"));
+              Sort.by(Sort.Direction.DESC, "publishDate"));
       Page<Post> postsPage = postService.findPublishedPostsByTag(tag, pageable);
       model.addAttribute("page", postsPage);
     }

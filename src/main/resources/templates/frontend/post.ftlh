@@ -1,5 +1,5 @@
 <#-- @ftlvariable name="post" type="com.bianjp.blog.entity.Post" -->
-<#import "components/post.ftl" as components>
+<#import "components/post.ftlh" as components>
 
 <@layout.layout pageTitle=post.title>
   <article class="ui very padded segment">
@@ -14,5 +14,5 @@
     <div id="social-share"></div>
   </section>
 
-  <#include "included/disqus.ftl">
+  <#include "included/disqus.ftlh">
 </@layout.layout>

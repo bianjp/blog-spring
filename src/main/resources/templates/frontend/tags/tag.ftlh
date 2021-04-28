@@ -1,8 +1,8 @@
 <#-- @ftlvariable name="tagName" type="java.lang.String" -->
 <#-- @ftlvariable name="tag" type="com.bianjp.blog.entity.Tag" -->
 <#-- @ftlvariable name="page" type="org.springframework.data.domain.Page<com.bianjp.blog.entity.Post>" -->
-<#import "../components/post.ftl" as components>
-<#import "../../helper/pagination.ftl" as pagination>
+<#import "../components/post.ftlh" as components>
+<#import "../../helper/pagination.ftlh" as pagination>
 
 <@layout.layout pageTitle="Tag: ${tagName}" containerClass="posts-of-tag">
   <#if !tag??>
